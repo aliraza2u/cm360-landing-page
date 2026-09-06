@@ -1,38 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f9ff;
-  --foreground: #0b1220;
-  --brand: #2f80ed;
-  --brand-deep: #1a5fd4;
-  --brand-bright: #4da3ff;
-  --brand-soft: #e8f1fe;
+  --navy-900: #0b2344;
+  --navy-800: #0d2e5c;
+  --background: #f7fbff;
+  --foreground: #0a2240;
+  --brand: #1677ff;
+  --brand-deep: #145ceb;
+  --brand-bright: #2f6bff;
+  --brand-soft: #edf6ff;
   --brand-wash: #f0f7ff;
-  --indigo: #4f46e5;
-  --indigo-soft: #eef2ff;
-  --cyan: #06b6d4;
-  --cyan-soft: #ecfeff;
-  --navy: #0b1f3a;
+  --indigo: #5a4cf2;
+  --indigo-soft: #eeeffe;
+  --cyan: #23c7e8;
+  --cyan-soft: #e8f9fd;
+  --mint: #44d7b6;
+  --amber: #ffaa3b;
+  --navy: #0b2344;
   --surface: #ffffff;
-  --muted: #5b6b7f;
-  --muted-soft: #8b9aab;
-  --border: #dbe7f5;
-  --ink: #0b1f3a;
+  --surface-blue: #edf6ff;
+  --muted: #64748b;
+  --muted-soft: #94a3b8;
+  --border: rgba(22, 119, 255, 0.16);
+  --ink: #0a2240;
   --ink-secondary: #334155;
   --success: #16a34a;
   --warning: #d97706;
   --danger: #dc2626;
-  --shadow-sm: 0 1px 2px rgba(11, 31, 58, 0.04), 0 1px 3px rgba(47, 128, 237, 0.05);
-  --shadow-md: 0 10px 30px rgba(11, 31, 58, 0.07), 0 4px 12px rgba(47, 128, 237, 0.08);
-  --shadow-lg: 0 28px 60px rgba(11, 31, 58, 0.1), 0 10px 24px rgba(79, 70, 229, 0.08);
-  --shadow-glow: 0 0 0 1px rgba(47, 128, 237, 0.08), 0 20px 50px rgba(47, 128, 237, 0.18);
-  --radius: 20px;
+  --shadow-sm: 0 1px 2px rgba(11, 35, 68, 0.04), 0 1px 3px rgba(22, 119, 255, 0.05);
+  --shadow-md: 0 16px 50px rgba(11, 35, 68, 0.1);
+  --shadow-lg: 0 28px 80px rgba(8, 36, 82, 0.22);
+  --shadow-floating: 0 12px 36px rgba(12, 56, 128, 0.18);
+  --shadow-glow: 0 0 0 1px rgba(22, 119, 255, 0.08), 0 20px 50px rgba(22, 119, 255, 0.18);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --radius-lg: 28px;
   --header-h: 4.25rem;
-  --gradient-brand: linear-gradient(135deg, #1a5fd4 0%, #2f80ed 42%, #06b6d4 100%);
-  --gradient-hero: radial-gradient(ellipse 80% 60% at 15% 10%, rgba(77, 163, 255, 0.28), transparent 55%),
-    radial-gradient(ellipse 70% 50% at 90% 0%, rgba(79, 70, 229, 0.16), transparent 50%),
-    radial-gradient(ellipse 50% 40% at 70% 80%, rgba(6, 182, 212, 0.12), transparent 45%),
-    #f5f9ff;
+  --container: 1240px;
+  --gradient-primary: linear-gradient(135deg, #145ceb 0%, #178bfa 48%, #22c7e8 100%);
+  --gradient-brand: linear-gradient(135deg, #145ceb 0%, #178bfa 48%, #22c7e8 100%);
+  --gradient-hero: linear-gradient(135deg, #0b3c9d 0%, #1267e9 36%, #168ef7 72%, #22c7e8 100%);
+  --gradient-indigo-cyan: linear-gradient(135deg, #5a4cf2 0%, #1677ff 55%, #23c7e8 100%);
+  --gradient-soft: linear-gradient(180deg, #f7fbff 0%, #edf6ff 100%);
 }
 
 @theme inline {
@@ -47,8 +56,13 @@
   --color-indigo-soft: var(--indigo-soft);
   --color-cyan: var(--cyan);
   --color-cyan-soft: var(--cyan-soft);
+  --color-mint: var(--mint);
+  --color-amber: var(--amber);
   --color-navy: var(--navy);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
   --color-surface: var(--surface);
+  --color-surface-blue: var(--surface-blue);
   --color-muted: var(--muted);
   --color-muted-soft: var(--muted-soft);
   --color-border: var(--border);
@@ -58,7 +72,6 @@
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
   --shadow-lg: var(--shadow-lg);
@@ -74,7 +87,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -83,36 +96,38 @@ body {
   color: var(--ink);
 }
 
-.font-display {
-  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-}
-
 .container-page {
   width: 100%;
-  max-width: 74rem;
+  max-width: var(--container);
   margin-inline: auto;
   padding-inline: 1.25rem;
 }
 
 @media (min-width: 768px) {
   .container-page {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-page {
     padding-inline: 2rem;
   }
 }
 
 .section-pad {
-  padding-block: 4rem;
+  padding-block: 4.25rem;
 }
 
 @media (min-width: 768px) {
   .section-pad {
-    padding-block: 5.25rem;
+    padding-block: 5.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-pad {
-    padding-block: 6rem;
+    padding-block: 7rem;
   }
 }
 
@@ -120,74 +135,159 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--brand-deep);
+  color: var(--brand);
 }
 
 .section-title {
-  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
-  font-size: clamp(1.7rem, 3vw, 2.45rem);
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
   font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.032em;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
   color: var(--ink);
 }
 
 .section-lead {
   margin-top: 0.875rem;
   max-width: 38rem;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
   color: var(--muted);
 }
 
-.hero-surface {
-  background: var(--gradient-hero);
-}
-
 .soft-surface {
-  background:
-    radial-gradient(90% 70% at 0% 0%, rgba(47, 128, 237, 0.08), transparent 55%),
-    radial-gradient(70% 60% at 100% 20%, rgba(6, 182, 212, 0.07), transparent 50%),
-    #f8fbff;
+  background: var(--gradient-soft);
 }
 
-.blueprint-grid {
-  background-image:
-    linear-gradient(rgba(47, 128, 237, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47, 128, 237, 0.06) 1px, transparent 1px);
-  background-size: 28px 28px;
-  mask-image: radial-gradient(ellipse 75% 70% at 60% 45%, black 20%, transparent 75%);
+.surface-blue {
+  background: var(--surface-blue);
 }
 
-.glass-panel {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(219, 231, 245, 0.9);
-  backdrop-filter: blur(14px);
-  box-shadow: var(--shadow-md);
+.blueprint-overlay {
+  background-image: url("/assets/assets/blueprint-grid-overlay.svg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.35;
 }
 
 .device-chrome {
-  border: 1px solid var(--border);
+  border: 1px solid rgba(22, 119, 255, 0.14);
   background: var(--surface);
-  box-shadow: var(--shadow-glow);
-}
-
-.insight-chip {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(219, 231, 245, 0.95);
-  backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
 }
 
 .text-gradient {
-  background: linear-gradient(120deg, #1a5fd4 0%, #2f80ed 45%, #06b6d4 100%);
+  background: linear-gradient(120deg, #23c7e8 0%, #7dd3fc 55%, #e0f2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.text-gradient-dark {
+  background: linear-gradient(120deg, #145ceb 0%, #1677ff 45%, #23c7e8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+/* Hero cinematic layers — background stays behind content via explicit z-index */
+.hero-cinematic {
+  isolation: isolate;
+}
+
+.hero-cinematic-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: #061840;
+  background-image: url("/assets/cm360_hero_svg_assets/wide_cinematic_high_resolution_scene_of_a_modern_c_optimized.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Mobile: favor darker left so construction detail isn’t behind text */
+  background-position: 18% center;
+}
+
+@media (min-width: 640px) {
+  .hero-cinematic-bg {
+    background-position: 32% center;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-cinematic-bg {
+    background-position: 55% center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-cinematic-bg {
+    background-position: 72% center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-cinematic-bg {
+    background-position: 78% center;
+  }
+}
+
+/* Left-side readability gradient — above photo, below content */
+.hero-cinematic-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(3, 24, 58, 0.9) 0%,
+    rgba(4, 44, 94, 0.72) 42%,
+    rgba(4, 66, 126, 0.35) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hero-cinematic-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(3, 24, 58, 0.92) 0%,
+      rgba(4, 44, 94, 0.74) 38%,
+      rgba(4, 66, 126, 0.28) 65%,
+      rgba(4, 66, 126, 0.05) 100%
+    );
+  }
+}
+
+/* Problem → Solution — sits under hero wave bleed (same #F4FAFF) */
+.problem-solution-section {
+  isolation: isolate;
+  background-color: #f4faff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}
+
+.hero-wave {
+  /* Keeps the wave paint above the next section while margin pulls it into it */
+  line-height: 0;
+}
+
+/* Multi-device section */
+.multi-device-section {
+  isolation: isolate;
+  background-color: #f4faff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 @keyframes rise-in {
@@ -220,6 +320,37 @@ body {
   }
 }
 
+/* Problem → Solution composition motion */
+@keyframes problem-drift-in {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(8px, -6px);
+  }
+}
+
+@keyframes solution-drift-in {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-8px, -5px);
+  }
+}
+
+@keyframes phone-float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
 .animate-rise {
   animation: rise-in 0.7s ease-out both;
 }
@@ -244,8 +375,19 @@ body {
   animation: float-y 5.5s ease-in-out infinite;
 }
 
-.animate-float-delay {
-  animation: float-y 6.5s ease-in-out 0.8s infinite;
+.animate-problem-drift {
+  animation: problem-drift-in 7.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-solution-drift {
+  animation: solution-drift-in 8.2s ease-in-out 0.6s infinite;
+  will-change: transform;
+}
+
+.animate-phone-float {
+  animation: phone-float-soft 6s ease-in-out 0.2s infinite;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -259,7 +401,9 @@ body {
   .animate-rise-delay-3,
   .animate-fade,
   .animate-float,
-  .animate-float-delay {
+  .animate-problem-drift,
+  .animate-solution-drift,
+  .animate-phone-float {
     animation: none;
   }
 }

@@ -1,16 +1,20 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline";
+type Variant = "primary" | "secondary" | "ghost" | "outline" | "onDark" | "onDarkOutline";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-gradient-to-br from-brand-deep via-brand to-cyan text-white shadow-[0_10px_28px_rgba(47,128,237,0.35)] hover:brightness-[1.03] hover:shadow-[0_14px_32px_rgba(47,128,237,0.4)]",
+    "bg-gradient-primary text-white shadow-[0_10px_24px_rgba(22,119,255,0.28)] hover:-translate-y-px hover:shadow-[0_14px_30px_rgba(22,119,255,0.34)]",
   secondary:
-    "bg-white/90 text-ink border border-border hover:border-brand/35 hover:bg-white shadow-sm",
+    "bg-white text-ink border border-[rgba(22,119,255,0.16)] hover:border-brand/35 hover:bg-brand-soft/40 shadow-sm",
   outline:
     "bg-transparent text-brand-deep border border-brand/30 hover:bg-brand-soft",
-  ghost: "bg-transparent text-ink-secondary hover:text-ink hover:bg-white/70",
+  ghost: "bg-transparent text-ink-secondary hover:text-ink hover:bg-brand-soft/50",
+  onDark:
+    "bg-white text-brand-deep shadow-sm hover:bg-white/95 hover:-translate-y-px",
+  onDarkOutline:
+    "bg-white/10 text-white border border-white/45 backdrop-blur-sm hover:bg-white/18",
 };
 
 type CommonProps = {
@@ -32,7 +36,7 @@ type ButtonAsLink = CommonProps &
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-60";
+  "inline-flex items-center justify-center gap-2 rounded-[12px] px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-60";
 
 export function Button(props: ButtonProps) {
   const { variant = "primary", className = "", children, ...rest } = props;

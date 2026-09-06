@@ -37,11 +37,11 @@ export function ProductMockup({
 
   return (
     <div
-      className={`device-chrome overflow-hidden rounded-[20px] transition-transform duration-300 hover:-translate-y-0.5 ${className}`}
+      className={`device-chrome overflow-hidden rounded-[24px] transition-transform duration-300 hover:-translate-y-0.5 ${className}`}
       role="img"
       aria-label={`CM360 ${titles[variant]} interface preview`}
     >
-      <div className="flex items-center gap-2 border-b border-border bg-gradient-to-r from-[#f8fbff] to-[#f1f6ff] px-3 py-2.5">
+      <div className="flex items-center gap-2 border-b border-[rgba(22,119,255,0.12)] bg-gradient-to-r from-[#f8fbff] to-[#f1f6ff] px-3.5 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-[#fecaca]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#fde68a]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#bbf7d0]" />
@@ -51,17 +51,17 @@ export function ProductMockup({
       </div>
 
       <div
-        className={`grid bg-white ${compact ? "min-h-[210px]" : "min-h-[270px] md:min-h-[330px]"} grid-cols-[auto_1fr]`}
+        className={`grid bg-white ${compact ? "min-h-[240px]" : "min-h-[320px] md:min-h-[400px]"} grid-cols-[auto_1fr]`}
       >
-        <aside className="hidden w-[4.25rem] border-r border-border bg-gradient-to-b from-[#f5f9ff] to-white p-2.5 sm:block md:w-40">
-          <div className="mb-3 h-8 w-8 rounded-lg bg-gradient-to-br from-brand to-cyan md:h-8 md:w-24 md:bg-brand/15" />
+        <aside className="hidden w-[4.5rem] border-r border-[rgba(22,119,255,0.12)] bg-gradient-to-b from-[#f5f9ff] to-white p-2.5 sm:block md:w-44">
+          <div className="mb-3 h-8 w-8 rounded-lg bg-gradient-primary md:h-8 md:w-28 md:bg-brand/15" />
           <div className="space-y-1.5">
             {["Overview", "Projects", "Labour", "Company", "Reports"].map((item, i) => (
               <div
                 key={item}
                 className={`h-8 rounded-lg transition-colors ${
                   i === activeIndex
-                    ? "bg-gradient-to-r from-brand to-indigo text-white shadow-sm"
+                    ? "bg-gradient-primary text-white shadow-sm"
                     : "bg-brand-soft/60"
                 }`}
               >
@@ -73,22 +73,22 @@ export function ProductMockup({
           </div>
         </aside>
 
-        <div className={`space-y-3 ${compact ? "p-3" : "p-3 sm:p-4"}`}>
+        <div className={`space-y-3 ${compact ? "p-3" : "p-3.5 sm:p-5"}`}>
           <div className="flex items-center justify-between gap-3">
             <div>
               <div className="h-2.5 w-20 rounded bg-brand-soft" />
-              <div className="mt-2 h-4 w-36 rounded bg-slate-200/80" />
+              <div className="mt-2 h-4 w-40 rounded bg-slate-200/80" />
             </div>
-            <div className="h-8 w-[4.5rem] rounded-lg bg-gradient-to-r from-brand to-cyan" />
+            <div className="h-8 w-[4.5rem] rounded-lg bg-gradient-primary" />
           </div>
 
           {(variant === "dashboard" || variant === "reports") && (
             <>
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 {["Projects", "Payments", "Labour", "Expenses"].map((label, i) => (
                   <div
                     key={label}
-                    className="rounded-xl border border-border bg-gradient-to-br from-brand-wash to-white p-2.5"
+                    className="rounded-[14px] border border-[rgba(22,119,255,0.12)] bg-gradient-to-br from-brand-wash to-white p-3"
                   >
                     <p className="text-[10px] font-semibold uppercase tracking-wide text-muted">
                       {label}
@@ -102,20 +102,20 @@ export function ProductMockup({
                   </div>
                 ))}
               </div>
-              <div className="grid gap-2 sm:grid-cols-[1.35fr_1fr]">
-                <div className="rounded-xl border border-border bg-[#fbfdff] p-3">
+              <div className="grid gap-2.5 sm:grid-cols-[1.35fr_1fr]">
+                <div className="rounded-[14px] border border-[rgba(22,119,255,0.12)] bg-[#fbfdff] p-3.5">
                   <div className="mb-3 h-2.5 w-24 rounded bg-slate-200" />
-                  <div className="flex h-24 items-end gap-1.5">
+                  <div className="flex h-28 items-end gap-1.5">
                     {[42, 68, 50, 82, 58, 74, 62].map((h, i) => (
                       <div
                         key={i}
-                        className="flex-1 rounded-t-md bg-gradient-to-t from-brand to-cyan"
+                        className="flex-1 rounded-t-md bg-gradient-primary"
                         style={{ height: `${h}%`, opacity: 0.4 + i * 0.07 }}
                       />
                     ))}
                   </div>
                 </div>
-                <div className="rounded-xl border border-border p-3">
+                <div className="rounded-[14px] border border-[rgba(22,119,255,0.12)] p-3.5">
                   <div className="mb-3 h-2.5 w-16 rounded bg-slate-200" />
                   <div className="space-y-2.5">
                     {[72, 54, 38].map((w, i) => (
@@ -138,15 +138,15 @@ export function ProductMockup({
           )}
 
           {variant === "projects" && (
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {["Active project", "Client payments", "Project expenses", "Client workspace"].map(
                 (row, i) => (
                   <div
                     key={row}
-                    className="flex items-center gap-3 rounded-xl border border-border bg-[#fbfdff] px-3 py-2.5"
+                    className="flex items-center gap-3 rounded-[14px] border border-[rgba(22,119,255,0.12)] bg-[#fbfdff] px-3.5 py-3"
                   >
                     <div
-                      className={`h-9 w-9 rounded-lg ${
+                      className={`h-10 w-10 rounded-lg ${
                         i % 2 === 0 ? "bg-brand-soft" : "bg-cyan-soft"
                       }`}
                     />
@@ -154,7 +154,7 @@ export function ProductMockup({
                       <p className="truncate text-xs font-semibold text-ink">{row}</p>
                       <div className="mt-1.5 h-1.5 w-full rounded-full bg-slate-100">
                         <div
-                          className="h-1.5 rounded-full bg-gradient-to-r from-brand to-cyan"
+                          className="h-1.5 rounded-full bg-gradient-primary"
                           style={{ width: `${52 + i * 11}%` }}
                         />
                       </div>
@@ -166,12 +166,15 @@ export function ProductMockup({
           )}
 
           {variant === "workforce" && (
-            <div className="grid gap-2 sm:grid-cols-2">
+            <div className="grid gap-2.5 sm:grid-cols-2">
               {["Site labour", "Attendance", "Payroll", "Temporary labour"].map((item, i) => (
-                <div key={item} className="rounded-xl border border-border bg-[#fbfdff] p-3">
+                <div
+                  key={item}
+                  className="rounded-[14px] border border-[rgba(22,119,255,0.12)] bg-[#fbfdff] p-3.5"
+                >
                   <div className="flex items-center gap-2">
                     <div
-                      className={`h-8 w-8 rounded-lg ${i % 2 === 0 ? "bg-brand-soft" : "bg-emerald-50"}`}
+                      className={`h-9 w-9 rounded-lg ${i % 2 === 0 ? "bg-brand-soft" : "bg-emerald-50"}`}
                     />
                     <div>
                       <p className="text-xs font-semibold text-ink">{item}</p>
@@ -184,15 +187,15 @@ export function ProductMockup({
           )}
 
           {variant === "contractors" && (
-            <div className="space-y-2">
-              {["Vendors", "Sub contractors", "Contractor payments"].map((item, i) => (
+            <div className="space-y-2.5">
+              {["Vendors", "Sub contractors", "Sub contractor payments"].map((item, i) => (
                 <div
                   key={item}
-                  className="flex items-center justify-between rounded-xl border border-border px-3 py-3"
+                  className="flex items-center justify-between rounded-[14px] border border-[rgba(22,119,255,0.12)] px-3.5 py-3.5"
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`h-9 w-9 rounded-lg ${
+                      className={`h-10 w-10 rounded-lg ${
                         i === 0 ? "bg-cyan-soft" : i === 1 ? "bg-indigo-soft" : "bg-brand-soft"
                       }`}
                     />
@@ -208,10 +211,13 @@ export function ProductMockup({
           )}
 
           {variant === "company" && (
-            <div className="grid gap-2 sm:grid-cols-2">
-              {["Employees", "Salary payments", "Office expenses", "User access"].map(
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              {["Employees", "Salary payments", "Office expenses", "User Access"].map(
                 (item, i) => (
-                  <div key={item} className="rounded-xl border border-border p-3">
+                  <div
+                    key={item}
+                    className="rounded-[14px] border border-[rgba(22,119,255,0.12)] p-3.5"
+                  >
                     <div
                       className={`mb-2 h-8 w-8 rounded-lg ${
                         i % 2 === 0 ? "bg-brand-soft" : "bg-indigo-soft"
@@ -238,11 +244,11 @@ export function ProductMockup({
 export function MobileMockup({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`device-chrome mx-auto w-[11.25rem] overflow-hidden rounded-[1.7rem] border-[5px] border-slate-800/90 sm:w-[12.25rem] ${className}`}
+      className={`device-chrome mx-auto w-[12.5rem] overflow-hidden rounded-[1.85rem] border-[5px] border-slate-800/90 sm:w-[13.5rem] ${className}`}
       role="img"
       aria-label="CM360 mobile app preview"
     >
-      <div className="bg-gradient-to-br from-[#1a5fd4] via-[#2f80ed] to-[#06b6d4] px-3 pb-4 pt-3 text-white">
+      <div className="bg-gradient-primary px-3 pb-4 pt-3 text-white">
         <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/40" />
         <p className="text-[10px] font-medium text-white/80">On site</p>
         <p className="mt-1 text-sm font-semibold">Company home</p>
@@ -259,7 +265,7 @@ export function MobileMockup({ className = "" }: { className?: string }) {
         {["Attendance", "Expenses", "Payments"].map((item) => (
           <div
             key={item}
-            className="flex items-center gap-2 rounded-xl border border-border bg-white px-2.5 py-2"
+            className="flex items-center gap-2 rounded-xl border border-[rgba(22,119,255,0.12)] bg-white px-2.5 py-2"
           >
             <div className="h-7 w-7 rounded-lg bg-brand-soft" />
             <div className="flex-1">
@@ -276,25 +282,28 @@ export function MobileMockup({ className = "" }: { className?: string }) {
 export function TabletMockup({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`device-chrome overflow-hidden rounded-[1.35rem] ${className}`}
+      className={`device-chrome overflow-hidden rounded-[24px] ${className}`}
       role="img"
       aria-label="CM360 tablet interface preview"
     >
-      <div className="border-b border-border bg-gradient-to-r from-[#f8fbff] to-white px-3 py-2 text-xs font-medium text-muted">
+      <div className="border-b border-[rgba(22,119,255,0.12)] bg-gradient-to-r from-[#f8fbff] to-white px-3 py-2.5 text-xs font-medium text-muted">
         CM360 · Field & office
       </div>
-      <div className="grid grid-cols-3 gap-2 bg-white p-3">
+      <div className="grid min-h-[220px] grid-cols-3 gap-2.5 bg-white p-4 md:min-h-[260px]">
         {["Projects", "Labour", "Reports"].map((label, i) => (
-          <div key={label} className="rounded-xl border border-border p-3">
+          <div
+            key={label}
+            className="rounded-[14px] border border-[rgba(22,119,255,0.12)] p-3.5"
+          >
             <div
-              className={`mb-2 h-8 w-8 rounded-lg ${
+              className={`mb-2 h-9 w-9 rounded-lg ${
                 i === 0 ? "bg-brand-soft" : i === 1 ? "bg-cyan-soft" : "bg-indigo-soft"
               }`}
             />
             <p className="text-xs font-semibold text-ink">{label}</p>
             <div className="mt-2 h-1.5 w-full rounded-full bg-slate-100">
               <div
-                className="h-1.5 rounded-full bg-gradient-to-r from-brand to-cyan"
+                className="h-1.5 rounded-full bg-gradient-primary"
                 style={{ width: `${50 + i * 15}%` }}
               />
             </div>

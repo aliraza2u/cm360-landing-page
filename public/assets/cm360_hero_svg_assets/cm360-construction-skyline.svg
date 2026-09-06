@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+<defs>
+ <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DDF8FF" stop-opacity="0.95"/><stop offset="1" stop-color="#8FD8FF" stop-opacity="0.38"/></linearGradient>
+ <linearGradient id="b2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BEEBFF" stop-opacity="0.8"/><stop offset="1" stop-color="#67C7FF" stop-opacity="0.18"/></linearGradient>
+</defs>
+<g fill="none" stroke="#DDF7FF" stroke-linecap="round" stroke-linejoin="round" opacity="0.70">
+  <!-- crane 1 -->
+  <path d="M725 168V562 M690 220H1010 M725 168L690 220 M725 168L798 220" stroke-width="5"/>
+  <path d="M740 220l-15 24 30 24-30 24 30 24-30 24 30 24-30 24 30 24-30 24" stroke-width="3" opacity="0.8"/>
+  <path d="M725 244l15 24-15 24 15 24-15 24 15 24-15 24 15 24-15 24" stroke-width="3" opacity="0.8"/>
+  <path d="M1000 220V338 M994 338h12v32a18 18 0 0 1-36 0" stroke-width="4"/>
+  <!-- crane 2 -->
+  <path d="M935 110V420 M910 158H1160 M935 110L910 158 M935 110L995 158" stroke-width="4" opacity="0.5"/>
+  <path d="M1148 158V254 M1140 254h16v24a13 13 0 0 1-26 0" stroke-width="3" opacity="0.5"/>
+</g>
+<!-- buildings -->
+<g stroke="#EAFBFF" stroke-opacity="0.82" stroke-width="3">
+  <path d="M610 600V318L720 278V600Z" fill="url(#b1)"/>
+  <path d="M752 600V380L854 348V600Z" fill="url(#b2)"/>
+  <path d="M875 600V436L962 410V600Z" fill="url(#b2)" opacity="0.85"/>
+  <path d="M990 600V490L1084 456V600Z" fill="url(#b2)" opacity="0.6"/>
+  <path d="M530 600V410L596 388V600Z" fill="url(#b2)" opacity="0.65"/>
+</g>
+<!-- window hints -->
+<g stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="2">
+ <path d="M640 335V590 M680 320V590 M620 390H710 M620 450H710 M620 510H710"/>
+ <path d="M776 398V590 M820 382V590 M760 448H844 M760 500H844 M760 552H844"/>
+</g>
+</svg>

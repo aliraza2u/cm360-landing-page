@@ -7,6 +7,7 @@ type LogoProps = {
   className?: string;
   showWordmark?: boolean;
   size?: number;
+  onDark?: boolean;
 };
 
 export function Logo({
@@ -14,6 +15,7 @@ export function Logo({
   className = "",
   showWordmark = true,
   size = 36,
+  onDark = false,
 }: LogoProps) {
   const content = (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
@@ -28,8 +30,12 @@ export function Logo({
         unoptimized
       />
       {showWordmark ? (
-        <span className="font-display text-[1.15rem] font-bold tracking-tight text-ink sm:text-[1.2rem]">
-          CM<span className="text-brand-deep">360</span>
+        <span
+          className={`text-[1.15rem] font-bold tracking-tight sm:text-[1.2rem] ${
+            onDark ? "text-white" : "text-ink"
+          }`}
+        >
+          CM<span className={onDark ? "text-cyan" : "text-brand"}>360</span>
           <span className="sr-only">{BRAND.name}</span>
         </span>
       ) : (

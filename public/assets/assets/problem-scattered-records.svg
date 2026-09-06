@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520" fill="none">
+<defs>
+  <filter id="s" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#0B2344" flood-opacity=".12"/></filter>
+  <linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EAF5FF"/><stop offset="1" stop-color="#F9FCFF"/></linearGradient>
+</defs>
+<!-- notebook -->
+<g transform="translate(70 92) rotate(-7 135 150)" filter="url(#s)">
+  <rect x="0" y="0" width="270" height="300" rx="26" fill="white"/>
+  <rect x="0" y="0" width="270" height="54" rx="26" fill="#EAF5FF"/>
+  <circle cx="34" cy="27" r="5" fill="#1677FF"/>
+  <circle cx="55" cy="27" r="5" fill="#23C7E8"/>
+  <circle cx="76" cy="27" r="5" fill="#5A4CF2"/>
+  <path d="M36 92H232M36 130H220M36 168H238M36 206H196M36 244H224" stroke="#AFC9E8" stroke-width="7" stroke-linecap="round"/>
+</g>
+
+<!-- chat -->
+<g transform="translate(324 58) rotate(6 120 110)" filter="url(#s)">
+  <rect x="0" y="0" width="240" height="220" rx="28" fill="white"/>
+  <circle cx="58" cy="66" r="26" fill="#44D7B6"/>
+  <path d="M48 65l8 8l15-18" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 56H190M104 88H172M34 136H200M34 170H168" stroke="#AFC9E8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M190 220l-34-2l34-31z" fill="white"/>
+</g>
+
+<!-- sheet -->
+<g transform="translate(280 272) rotate(3 120 85)" filter="url(#s)">
+  <rect width="250" height="170" rx="24" fill="white"/>
+  <rect x="24" y="24" width="46" height="46" rx="10" fill="#EAFBF6"/>
+  <path d="M38 36l18 22M56 36L38 58" stroke="#21A875" stroke-width="6" stroke-linecap="round"/>
+  <path d="M88 42H214M88 72H188" stroke="#AFC9E8" stroke-width="7" stroke-linecap="round"/>
+  <path d="M28 110H222M28 140H222" stroke="#D2E1F0" stroke-width="5"/>
+  <path d="M90 94V156M150 94V156" stroke="#D2E1F0" stroke-width="4"/>
+</g>
+
+<!-- arrow to one system -->
+<path d="M565 257C642 239 674 229 736 231" stroke="#1677FF" stroke-width="8" stroke-linecap="round"/>
+<path d="M716 210l28 21l-28 22" stroke="#1677FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+<!-- solution block -->
+<g transform="translate(730 112)" filter="url(#s)">
+  <rect width="170" height="300" rx="30" fill="url(#a)" stroke="#A7D2FF" stroke-width="2"/>
+  <circle cx="85" cy="68" r="34" fill="#1677FF"/>
+  <path d="M66 70c22-30 39-30 57 0M64 79c24 25 43 25 62-2" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M34 132H136M34 164H126M34 196H140M34 228H120" stroke="#AFC9E8" stroke-width="7" stroke-linecap="round"/>
+  <rect x="34" y="254" width="102" height="24" rx="12" fill="#DBF0FF"/>
+</g>
+</svg>

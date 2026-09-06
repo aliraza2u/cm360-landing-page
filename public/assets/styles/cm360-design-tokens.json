@@ -1,0 +1,155 @@
+{
+  "brand": {
+    "name": "CM360",
+    "descriptor": "Construction Management Platform",
+    "tagline": "Build. Manage. Grow."
+  },
+  "colors": {
+    "navy900": "#0B2344",
+    "navy800": "#0D2E5C",
+    "blue600": "#145CEB",
+    "blue500": "#1677FF",
+    "electricBlue": "#2F6BFF",
+    "cyan500": "#23C7E8",
+    "indigo500": "#5A4CF2",
+    "mint500": "#44D7B6",
+    "amber400": "#FFAA3B",
+    "textPrimary": "#0A2240",
+    "textSecondary": "#64748B",
+    "page": "#F7FBFF",
+    "surface": "#FFFFFF",
+    "surfaceBlue": "#EDF6FF",
+    "border": "rgba(22,119,255,.16)"
+  },
+  "gradients": {
+    "primary": "linear-gradient(135deg,#145CEB 0%,#178BFA 48%,#22C7E8 100%)",
+    "hero": "linear-gradient(135deg,#0B3C9D 0%,#1267E9 36%,#168EF7 72%,#22C7E8 100%)",
+    "indigoCyan": "linear-gradient(135deg,#5A4CF2 0%,#1677FF 55%,#23C7E8 100%)",
+    "softSection": "linear-gradient(180deg,#F7FBFF 0%,#EDF6FF 100%)"
+  },
+  "typography": {
+    "fontFamily": "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700,
+      "extrabold": 800
+    },
+    "desktop": {
+      "display": {
+        "size": "64px",
+        "lineHeight": "1.02",
+        "weight": 800,
+        "letterSpacing": "-0.045em"
+      },
+      "h2": {
+        "size": "44px",
+        "lineHeight": "1.08",
+        "weight": 750,
+        "letterSpacing": "-0.035em"
+      },
+      "h3": {
+        "size": "28px",
+        "lineHeight": "1.16",
+        "weight": 700,
+        "letterSpacing": "-0.02em"
+      },
+      "bodyLg": {
+        "size": "18px",
+        "lineHeight": "1.7",
+        "weight": 400
+      },
+      "body": {
+        "size": "16px",
+        "lineHeight": "1.7",
+        "weight": 400
+      },
+      "small": {
+        "size": "14px",
+        "lineHeight": "1.55",
+        "weight": 500
+      },
+      "eyebrow": {
+        "size": "12px",
+        "lineHeight": "1",
+        "weight": 700,
+        "letterSpacing": "0.12em"
+      }
+    },
+    "tablet": {
+      "display": {
+        "size": "52px",
+        "lineHeight": "1.04",
+        "weight": 800,
+        "letterSpacing": "-0.04em"
+      },
+      "h2": {
+        "size": "38px",
+        "lineHeight": "1.1",
+        "weight": 750
+      },
+      "h3": {
+        "size": "25px",
+        "lineHeight": "1.18",
+        "weight": 700
+      },
+      "bodyLg": {
+        "size": "17px",
+        "lineHeight": "1.65",
+        "weight": 400
+      },
+      "body": {
+        "size": "15px",
+        "lineHeight": "1.65",
+        "weight": 400
+      }
+    },
+    "mobile": {
+      "display": {
+        "size": "40px",
+        "lineHeight": "1.05",
+        "weight": 800,
+        "letterSpacing": "-0.035em"
+      },
+      "h2": {
+        "size": "32px",
+        "lineHeight": "1.1",
+        "weight": 750
+      },
+      "h3": {
+        "size": "23px",
+        "lineHeight": "1.18",
+        "weight": 700
+      },
+      "bodyLg": {
+        "size": "16px",
+        "lineHeight": "1.65",
+        "weight": 400
+      },
+      "body": {
+        "size": "15px",
+        "lineHeight": "1.65",
+        "weight": 400
+      }
+    }
+  },
+  "layout": {
+    "containerMax": "1240px",
+    "containerPaddingDesktop": "32px",
+    "containerPaddingTablet": "24px",
+    "containerPaddingMobile": "20px",
+    "sectionDesktop": "112px",
+    "sectionTablet": "88px",
+    "sectionMobile": "68px",
+    "radiusSm": "12px",
+    "radiusMd": "18px",
+    "radiusLg": "28px",
+    "radiusHero": "32px"
+  },
+  "shadows": {
+    "soft": "0 16px 50px rgba(11,35,68,.10)",
+    "product": "0 28px 80px rgba(8,36,82,.22)",
+    "floating": "0 12px 36px rgba(12,56,128,.18)"
+  }
+}

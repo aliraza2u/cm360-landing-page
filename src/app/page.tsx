@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/sections/hero";
 import { ProblemSection } from "@/components/sections/problem";
 import { PlatformFlowSection } from "@/components/sections/platform-flow";
 import { FeaturesSection } from "@/components/sections/features";
-import { BenefitsSection } from "@/components/sections/benefits";
 import { MultiDeviceSection } from "@/components/sections/multi-device";
 import { AudienceSection } from "@/components/sections/audience";
 import { SecuritySection } from "@/components/sections/security";
@@ -44,7 +43,6 @@ export default function Home() {
         <ProblemSection />
         <PlatformFlowSection />
         <FeaturesSection />
-        <BenefitsSection />
         <MultiDeviceSection />
         <AudienceSection />
         <SecuritySection />

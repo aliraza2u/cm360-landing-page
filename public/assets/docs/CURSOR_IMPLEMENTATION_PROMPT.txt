@@ -1,0 +1,150 @@
+Redesign the existing CM360 Next.js landing page using the supplied production asset pack as the visual source.
+
+FIRST inspect the current page, CM360 SVG/logo, existing product/dummy screenshots, routes, SEO metadata and styling setup. Do not rebuild from scratch if existing components can be reused.
+
+ASSETS
+Use these supplied assets directly:
+- `hero-gradient-blueprint.svg` → hero background layer
+- `blueprint-grid-overlay.svg` → subtle transparent technical texture on selected light sections only
+- `construction-line-art.svg` → optional building/crane decorative layer
+- `section-glow-orbs.svg` → behind selected product mockups
+- `cta-gradient-blueprint.svg` → final CTA background
+- `problem-scattered-records.svg` → Problem → Solution illustration
+
+SVG is preferred on web; PNG files are fallbacks only.
+
+Read and follow `ASSET_AND_STYLE_GUIDE.md` and `cm360-design-tokens.json`.
+If the project uses Tailwind, translate these tokens into the existing Tailwind/theme setup rather than adding a parallel styling system.
+
+BRAND / TYPOGRAPHY
+- Brand: CM360
+- Descriptor: Construction Management Platform
+- Tagline: Build. Manage. Grow.
+- Font: Inter / Inter Variable
+- Hero H1 desktop ~64px, tablet ~52px, mobile ~40px
+- H2 desktop ~44px, tablet ~38px, mobile ~32px
+- H3 ~28/25/23px
+- Body 15–18px depending on viewport
+- deep navy text `#0A2240`
+- muted text `#64748B`
+- main blue `#1677FF`
+- cyan `#23C7E8`
+- indigo `#5A4CF2`
+- page background `#F7FBFF`
+- primary gradient `linear-gradient(135deg,#145CEB 0%,#178BFA 48%,#22C7E8 100%)`
+
+DESIGN GOAL
+The existing page is too pale, flat and box-heavy. Recompose it as a premium modern B2B SaaS landing page:
+- vivid but professional blue/indigo/cyan color system
+- strong dark/gradient hero
+- large layered CM360 product screenshots
+- asymmetric sections
+- alternating white / soft-blue section rhythm
+- controlled glows, depth and blueprint/construction cues
+- fewer repetitive bordered cards
+- product UI is the main visual
+- attractive first viewport that immediately communicates construction + records + money + workforce management
+
+PRODUCT SCREENSHOTS
+Reuse the current real/dummy CM360 screenshots already in the project.
+Do NOT regenerate fake screens.
+Place screenshots inside CSS browser/device frames so they remain replaceable.
+Hero should show large desktop dashboard + overlapping mobile preview.
+
+PAGE STORY / COPY
+1. Hero
+Eyebrow: CONSTRUCTION MANAGEMENT PLATFORM
+H1: Run Your Construction Business From One Place
+Copy: CM360 helps you manage projects, clients, labour, contractors, payments, expenses and more — so you always know what’s happening across your construction business.
+CTA: Get Started
+Secondary: See How It Works
+Confidence: All-in-one platform · Easy to use · Built for construction
+
+2. Problem
+H2: Construction work shouldn’t live in five places
+Copy: Projects, labour records, payments and expenses are often scattered across notebooks, WhatsApp and spreadsheets. It’s hard to get a clear view, easy to miss details, and important information gets lost.
+Use `problem-scattered-records.svg`.
+
+Solution:
+H3: CM360 brings everything together
+Copy: One connected place for projects, clients, site teams, contractors, payments, expenses and reports — so owners always know what’s happening.
+
+3. Workflow
+H2: Everything Connected. Nothing Scattered.
+Flow:
+Client → Project → Labour & Contractors → Expenses & Payments → Reports
+
+4. Projects & Clients
+Manage clients · Track project progress · Client payments · Project expenses
+
+5. Site & Workforce
+Site labour · Attendance · Payroll · Temporary labour
+
+6. Contractors & Vendors
+Vendors · Sub contractors · Sub contractor payments
+
+7. Company Control
+Employees · Salary payments · Office expenses · User Access
+
+8. Financial Visibility
+Project costs · Payments · Expenses · Dashboards & reports
+
+9. Outcomes
+Know Where Your Money Goes
+Keep Site Records Organized
+Stay Updated Across Projects
+Make Better Decisions
+
+10. Multi-device
+H2: From the Site to the Office
+Mobile · Desktop/Web · Tablet
+
+11. Who It’s For
+Builders · Construction Companies · Contractors · Project Managers
+
+12. Trust & Access
+Role-based access · Company-specific data · Controlled user access · Secure account access
+
+13. CTA
+H2: Ready to Bring Your Construction Business Together?
+Copy: Manage projects, teams, payments and expenses with CM360.
+Buttons: Get Started / Sign In
+Use `cta-gradient-blueprint.svg`.
+
+IMPORTANT
+- Do not add fake testimonials, logos, customers, ratings, user counts or financial claims.
+- Do not invent product functionality.
+- Do not change the ERP/backend/auth.
+- Preserve routes and SEO.
+- Do not redesign the CM360 logo.
+- Keep `User Access` terminology.
+- Avoid using cards for every piece of information.
+- Avoid hardcoded desktop positioning that breaks on tablet/mobile.
+- Use max content width about 1240px.
+- Section spacing: ~112px desktop / 88px tablet / 68px mobile.
+- Product screenshots should be substantially larger than on the current page.
+
+RESPONSIVE
+Test:
+- 360–390 mobile
+- normal mobile
+- 768–834 tablet portrait
+- tablet landscape
+- 1366 laptop
+- 1440+ desktop
+
+No overflow, tiny screenshots, giant whitespace, clipped text or unreadable labels.
+
+IMPLEMENTATION
+Make the smallest clean set of component/style changes.
+Use existing CSS/Tailwind conventions.
+Do not add a heavy animation library.
+Keep performance and semantic SEO strong.
+
+At the end report:
+- files changed
+- supplied assets used and where
+- current product screenshots reused
+- responsive behavior
+- any old sections/components removed or recomposed
+- build/typecheck result
