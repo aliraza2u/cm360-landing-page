@@ -276,6 +276,68 @@ body {
   background-position: center top;
 }
 
+/* Problem mobile module cards — chamfered face + top tab + accent glow */
+.problem-module-card {
+  --module-cut: 0.9rem;
+  position: relative;
+  min-width: 0;
+  padding-top: 0.4rem;
+  filter: drop-shadow(0 14px 24px var(--module-glow));
+}
+
+.problem-module-tab {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  width: 1.9rem;
+  height: 0.52rem;
+  translate: -50% 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--module-accent) 70%, white) 0%,
+    var(--module-accent) 45%,
+    color-mix(in srgb, var(--module-accent) 75%, #0b2344) 100%
+  );
+  clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%);
+}
+
+.problem-module-shell {
+  clip-path: polygon(
+    var(--module-cut) 0%,
+    calc(100% - var(--module-cut)) 0%,
+    100% var(--module-cut),
+    100% calc(100% - var(--module-cut)),
+    calc(100% - var(--module-cut)) 100%,
+    var(--module-cut) 100%,
+    0% calc(100% - var(--module-cut)),
+    0% var(--module-cut)
+  );
+  background: color-mix(in srgb, var(--module-accent) 45%, #fff);
+  padding: 1.5px;
+}
+
+.problem-module-face {
+  min-height: 5.1rem;
+  padding: 0.85rem 0.7rem 0.8rem;
+  background: #fff;
+  clip-path: polygon(
+    calc(var(--module-cut) - 1px) 0%,
+    calc(100% - (var(--module-cut) - 1px)) 0%,
+    100% calc(var(--module-cut) - 1px),
+    100% calc(100% - (var(--module-cut) - 1px)),
+    calc(100% - (var(--module-cut) - 1px)) 100%,
+    calc(var(--module-cut) - 1px) 100%,
+    0% calc(100% - (var(--module-cut) - 1px)),
+    0% calc(var(--module-cut) - 1px)
+  );
+}
+
+.problem-outcomes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .hero-wave {
   /* Keeps the wave paint above the next section while margin pulls it into it */
   line-height: 0;
@@ -288,6 +350,56 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+/* Mobile vertical sync: rotate connector arms up/down with title breathing room */
+.multi-device-connector {
+  width: 7.5rem;
+  height: auto;
+  min-height: 7.25rem;
+  margin-block: 0.65rem 0.85rem;
+  gap: 0.15rem;
+}
+
+.multi-device-connector-img {
+  width: 9.75rem;
+  height: auto;
+  max-width: none;
+  transform: rotate(90deg);
+  transform-origin: center;
+  margin-block: -0.85rem;
+}
+
+@keyframes device-badge-blink {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.55;
+    filter: brightness(1.08);
+  }
+}
+
+@keyframes device-badge-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  75%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.device-badge-blink {
+  animation: device-badge-blink 2s ease-in-out infinite;
+}
+
+.device-badge-ping {
+  animation: device-badge-ping 1.7s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
 @keyframes rise-in {
@@ -351,6 +463,36 @@ body {
   }
 }
 
+@keyframes hero-badge-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.42;
+  }
+}
+
+@keyframes hero-status-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  75%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.hero-badge-breathe {
+  animation: hero-badge-breathe 2.2s ease-in-out infinite;
+}
+
+.hero-status-ping {
+  animation: hero-status-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 .animate-rise {
   animation: rise-in 0.7s ease-out both;
 }
@@ -390,6 +532,56 @@ body {
   will-change: transform;
 }
 
+/* Who it's for */
+.who-its-for-section {
+  background-color: #f4f9ff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Contact */
+.contact-section {
+  background-color: #f4f9ff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+}
+
+@media (min-width: 768px) {
+  .contact-section {
+    background-position: center center;
+  }
+}
+
+/* Capabilities */
+.capabilities-section {
+  background-color: #f4f9ff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* Site footer */
+.site-footer {
+  background-color: #f7fbff;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    background-position: center center;
+  }
+}
+
+.audience-carousel {
+  scroll-padding-inline: 0.75rem;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -403,7 +595,11 @@ body {
   .animate-float,
   .animate-problem-drift,
   .animate-solution-drift,
-  .animate-phone-float {
+  .animate-phone-float,
+  .hero-badge-breathe,
+  .hero-status-ping,
+  .device-badge-blink,
+  .device-badge-ping {
     animation: none;
   }
 }

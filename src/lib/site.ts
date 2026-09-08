@@ -10,9 +10,49 @@ export const BRAND = {
   tagline: "Build. Manage. Grow.",
 } as const;
 
+/**
+ * Real contact channels only. Leave optional fields empty — UI omits them
+ * rather than inventing phone / office / hours.
+ * WhatsApp: digits only with country code (no + or spaces), e.g. "923001112233".
+ */
+export const CONTACT: {
+  email: string;
+  whatsapp: string;
+  phone: string;
+  office: string;
+  hours: string;
+} = {
+  email: "support@cm360.site",
+  whatsapp: "",
+  phone: "",
+  office: "",
+  hours: "",
+};
+
+export function whatsappUrl(message: string) {
+  const text = encodeURIComponent(message);
+  if (CONTACT.whatsapp) {
+    return `https://wa.me/${CONTACT.whatsapp}?text=${text}`;
+  }
+  // No WhatsApp number configured yet — keep actions working via email.
+  return `mailto:${CONTACT.email}?subject=${encodeURIComponent("CM360 inquiry")}&body=${text}`;
+}
+
 export const NAV_LINKS = [
-  { href: "#features", label: "Features" },
-  { href: "#how-it-works", label: "How It Works" },
+  { href: "#multi-device", label: "How It Works" },
   { href: "#who-its-for", label: "Who It’s For" },
   { href: "#contact", label: "Contact" },
 ] as const;
+
+/** Optional public social profiles — icons render only when a URL is set. */
+export const SOCIAL: {
+  linkedin: string;
+  youtube: string;
+  facebook: string;
+  x: string;
+} = {
+  linkedin: "",
+  youtube: "",
+  facebook: "",
+  x: "",
+};

@@ -53,7 +53,7 @@ export function Header() {
         <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <a
-              key={link.href}
+              key={link.label}
               href={link.href}
               className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                 solid
@@ -117,7 +117,7 @@ export function Header() {
           <nav className="container-page flex flex-col gap-1 py-4" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
               <a
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 className="rounded-xl px-3 py-3 text-base font-medium text-ink"
                 onClick={() => setOpen(false)}

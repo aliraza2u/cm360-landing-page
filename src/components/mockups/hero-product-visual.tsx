@@ -25,7 +25,7 @@ export function HeroProductVisual() {
           width={778}
           height={1680}
           priority
-          className="animate-float !w-[9.75rem] sm:!w-[11rem] md:!w-[12rem] lg:!w-[13rem]"
+          className="animate-float !w-[8rem] min-[390px]:!w-[8.75rem] sm:!w-[11rem] md:!w-[12rem] lg:!w-[13rem]"
         />
       </div>
 
@@ -45,7 +45,7 @@ export function HeroProductVisual() {
       </div>
 
       {/* Clearance for overlapping phone + laptop base */}
-      <div className="h-14 sm:h-16 md:h-12 lg:h-10" aria-hidden />
+      <div className="h-11 sm:h-16 md:h-12 lg:h-10" aria-hidden />
     </div>
   );
 }

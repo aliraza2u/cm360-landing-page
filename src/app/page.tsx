@@ -2,12 +2,9 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/sections/hero";
 import { ProblemSection } from "@/components/sections/problem";
-import { PlatformFlowSection } from "@/components/sections/platform-flow";
-import { FeaturesSection } from "@/components/sections/features";
+import { CapabilitiesSection } from "@/components/sections/capabilities";
 import { MultiDeviceSection } from "@/components/sections/multi-device";
 import { AudienceSection } from "@/components/sections/audience";
-import { SecuritySection } from "@/components/sections/security";
-import { FinalCtaSection } from "@/components/sections/final-cta";
 import { ContactSection } from "@/components/sections/contact";
 import { BRAND, SITE_URL } from "@/lib/site";
 
@@ -41,12 +38,9 @@ export default function Home() {
       <main id="main" className="flex-1">
         <HeroSection />
         <ProblemSection />
-        <PlatformFlowSection />
-        <FeaturesSection />
+        {/* <CapabilitiesSection /> */}
         <MultiDeviceSection />
         <AudienceSection />
-        <SecuritySection />
-        <FinalCtaSection />
         <ContactSection />
       </main>
       <Footer />

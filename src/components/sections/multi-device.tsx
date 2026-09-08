@@ -69,6 +69,42 @@ function Callout({
   );
 }
 
+/** Compact title-only chip for mobile device overlays. */
+function DeviceBadge({
+  children,
+  tone,
+  className = "",
+}: {
+  children: string;
+  tone: "site" | "office";
+  className?: string;
+}) {
+  const styles =
+    tone === "site"
+      ? {
+          wrap: "border-emerald-200/90 bg-emerald-50 text-emerald-700 shadow-[0_10px_24px_rgba(16,185,129,0.2)]",
+          dot: "bg-emerald-500",
+          ping: "bg-emerald-400",
+        }
+      : {
+          wrap: "border-[#bdd4ff] bg-[#edf5ff] text-[#145ceb] shadow-[0_10px_24px_rgba(22,119,255,0.2)]",
+          dot: "bg-[#1677ff]",
+          ping: "bg-[#5aa2ff]",
+        };
+
+  return (
+    <span
+      className={`device-badge device-badge-blink pointer-events-none absolute z-20 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[0.68rem] font-bold leading-none tracking-[-0.01em] ${styles.wrap} ${className}`}
+    >
+      <span className="relative inline-flex h-1.5 w-1.5 shrink-0" aria-hidden>
+        <span className={`device-badge-ping absolute inset-0 rounded-full ${styles.ping}`} />
+        <span className={`relative h-1.5 w-1.5 rounded-full ${styles.dot}`} />
+      </span>
+      {children}
+    </span>
+  );
+}
+
 export function MultiDeviceSection() {
   return (
     <section
@@ -166,42 +202,50 @@ export function MultiDeviceSection() {
           </ul>
         </div>
 
-        {/* ——— Mobile stack ——— */}
-        <div className="mt-8 space-y-8 md:hidden">
-          <div className="flex flex-col items-center gap-3">
-            <Callout
-              title="On Site"
-              detail="Track progress, labour and expenses in real time."
-            />
-            <PhoneFrame
-              src={ASSETS.mobile}
-              alt="CM360 mobile Site Labour payroll screen"
-              width={MOBILE_SIZE.width}
-              height={MOBILE_SIZE.height}
-              unoptimized
-              className="!w-[13rem]"
-            />
-          </div>
+        {/* ——— Mobile: compact vertical devices + title badges ——— */}
+        <div className="mt-8 md:hidden">
+          <div className="multi-device-mobile relative mx-auto flex w-full max-w-[20rem] flex-col items-center">
+            {/* Phone + On-site badge (right) */}
+            <div className="relative z-10">
+              <DeviceBadge tone="site" className="-right-2 top-6 min-[390px]:-right-3">
+                On-site
+              </DeviceBadge>
+              <PhoneFrame
+                src={ASSETS.mobile}
+                alt="CM360 mobile Site Labour payroll screen"
+                width={MOBILE_SIZE.width}
+                height={MOBILE_SIZE.height}
+                unoptimized
+                className="!w-[8.25rem]"
+              />
+            </div>
 
-          <div className="mx-auto flex max-w-[11rem] flex-col items-center text-center">
-            <Image
-              src={ASSETS.connecting}
-              alt=""
-              width={400}
-              height={225}
-              unoptimized
-              className="h-auto w-full mix-blend-lighten"
-            />
-            <p className="mt-1 text-sm font-bold text-ink">Real-time sync</p>
-            <p className="mt-0.5 text-xs text-muted">Same information. Everywhere.</p>
-          </div>
+            {/* Connector + sync title between devices */}
+            <div className="multi-device-connector relative z-[5] flex flex-col items-center justify-center">
+              <Image
+                src={ASSETS.connecting}
+                alt=""
+                width={400}
+                height={225}
+                unoptimized
+                className="multi-device-connector-img mix-blend-lighten"
+                aria-hidden
+              />
+              <div className="relative z-10 -mt-1 text-center">
+                <p className="text-[0.72rem] font-bold tracking-[-0.01em] text-ink">
+                  Real-time sync
+                </p>
+                <p className="mt-0.5 text-[0.62rem] leading-snug text-muted">
+                  Same info. Everywhere.
+                </p>
+              </div>
+            </div>
 
-          <div className="flex flex-col items-center gap-3">
-            <Callout
-              title="In the Office"
-              detail="Plan, monitor and make better decisions."
-            />
-            <div className="w-full max-w-[22rem]">
+            {/* Laptop + In the office badge (right) */}
+            <div className="relative z-10 w-full max-w-[15.5rem]">
+              <DeviceBadge tone="office" className="right-0 top-3 min-[390px]:-right-1">
+                In the office
+              </DeviceBadge>
               <LaptopFrame
                 src={ASSETS.laptop}
                 alt="CM360 desktop Site Labour dashboard"
@@ -212,7 +256,7 @@ export function MultiDeviceSection() {
             </div>
           </div>
 
-          <ul className="grid grid-cols-2 gap-3">
+          <ul className="mt-8 grid grid-cols-2 gap-3">
             {outcomes.map((item) => (
               <li
                 key={item.title}

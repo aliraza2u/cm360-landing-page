@@ -217,12 +217,12 @@ export function PhoneFrame({
       className={`relative w-[10.5rem] sm:w-[11.75rem] md:w-[12.75rem] lg:w-[13.5rem] ${className}`}
     >
       <div
-        className="pointer-events-none absolute -inset-3 -z-10 rounded-[2.4rem] bg-cyan/25 blur-2xl"
+        className="pointer-events-none absolute -inset-3 -z-10 rounded-[1.5rem] bg-cyan/25 blur-2xl sm:rounded-[2.4rem]"
         aria-hidden
       />
 
       <div
-        className="relative rounded-[1.85rem] p-[0.38rem] shadow-[0_28px_60px_rgba(2,24,61,0.5)] ring-1 ring-white/12 sm:rounded-[2rem] sm:p-[0.42rem]"
+        className="relative rounded-[1.15rem] p-[0.32rem] shadow-[0_28px_60px_rgba(2,24,61,0.5)] ring-1 ring-white/12 sm:rounded-[2rem] sm:p-[0.42rem]"
         style={{
           background:
             "linear-gradient(160deg, #2a3140 0%, #121826 40%, #070b14 100%)",
@@ -244,7 +244,7 @@ export function PhoneFrame({
           aria-hidden
         />
 
-        <div className="relative overflow-hidden rounded-[1.45rem] bg-[#F5F7FB] ring-1 ring-black/30 sm:rounded-[1.6rem]">
+        <div className="relative overflow-hidden rounded-[0.9rem] bg-[#F5F7FB] ring-1 ring-black/30 sm:rounded-[1.6rem]">
           <div className="relative aspect-[9/19.4] w-full overflow-hidden">
             <Image
               src={src}
