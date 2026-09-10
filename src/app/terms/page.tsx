@@ -1,39 +1,40 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { LegalMarkdown } from "@/components/legal-markdown";
+import { SITE_URL } from "@/lib/site";
+
+const TERMS_DESCRIPTION =
+  "Read the CM360 Terms & Conditions governing use of the CM360 construction management platform, company workspaces, subscriptions, user content, and account services.";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
-  description: "Terms of Service for CM360 construction management platform.",
+  title: "Terms & Conditions",
+  description: TERMS_DESCRIPTION,
   alternates: { canonical: "/terms" },
+  openGraph: {
+    title: "Terms & Conditions | CM360",
+    description: TERMS_DESCRIPTION,
+    url: `${SITE_URL}/terms`,
+  },
 };
 
-export default function TermsPage() {
+async function getTermsMarkdown() {
+  const filePath = path.join(process.cwd(), "public", "terms-and-conditions-content.md");
+  return readFile(filePath, "utf8");
+}
+
+export default async function TermsPage() {
+  const markdown = await getTermsMarkdown();
+
   return (
     <>
       <Header />
-      <main className="flex-1 bg-white">
-        <div className="container-page section-pad max-w-3xl">
+      <main className="flex-1 soft-surface">
+        <div className="container-page max-w-3xl pb-14 pt-10 md:pb-20 md:pt-14 lg:pb-24">
           <p className="eyebrow">Legal</p>
-          <h1 className="section-title mt-3">Terms of Service</h1>
-          <p className="section-lead">
-            This page is a placeholder. The full CM360 Terms of Service will be published here
-            shortly. For questions about terms of use, contact{" "}
-            <a
-              href="mailto:support@cm360.site"
-              className="font-medium text-brand-deep underline-offset-2 hover:underline"
-            >
-              support@cm360.site
-            </a>
-            .
-          </p>
-          <Link
-            href="/"
-            className="mt-8 inline-flex text-sm font-semibold text-brand-deep hover:underline"
-          >
-            ← Back to home
-          </Link>
+          <LegalMarkdown content={markdown} />
         </div>
       </main>
       <Footer />

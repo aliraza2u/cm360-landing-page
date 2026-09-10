@@ -27,7 +27,7 @@ const EXPLORE_LINKS = [
 const LEGAL_LINKS = [
   { href: "/privacy", label: "Privacy Policy" },
   { href: "/terms", label: "Terms" },
-  { href: "/account-deletion", label: "Account Deletion" },
+  { href: "/delete-account", label: "Account Deletion" },
 ] as const;
 
 const SOCIAL_ITEMS = [

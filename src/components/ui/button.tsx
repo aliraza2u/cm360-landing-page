@@ -38,12 +38,23 @@ export type ButtonProps = ButtonAsButton | ButtonAsLink;
 const base =
   "inline-flex items-center justify-center gap-2 rounded-[12px] px-5 py-2.5 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:opacity-60";
 
+function isExternalHref(href: string) {
+  return /^(https?:|mailto:|tel:)/i.test(href);
+}
+
 export function Button(props: ButtonProps) {
   const { variant = "primary", className = "", children, ...rest } = props;
   const classes = `${base} ${variants[variant]} ${className}`;
 
   if ("href" in rest && rest.href) {
     const { href, ...linkRest } = rest;
+    if (isExternalHref(href)) {
+      return (
+        <a href={href} className={classes} {...(linkRest as ComponentProps<"a">)}>
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={classes} {...linkRest}>
         {children}
