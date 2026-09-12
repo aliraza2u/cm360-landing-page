@@ -17,7 +17,14 @@ export const metadata: Metadata = {
     title: "Privacy Policy | CM360",
     description: PRIVACY_DESCRIPTION,
     url: `${SITE_URL}/privacy`,
+    type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy | CM360",
+    description: PRIVACY_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 async function getPrivacyPolicyMarkdown() {

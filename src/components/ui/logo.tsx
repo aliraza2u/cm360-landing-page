@@ -20,14 +20,13 @@ export function Logo({
   const content = (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <Image
-        src="/icon.svg"
+        src="/brand/icon-128.png"
         alt=""
         width={size}
         height={size}
         className="object-contain"
         style={{ width: size, height: size }}
         priority
-        unoptimized
       />
       {showWordmark ? (
         <span

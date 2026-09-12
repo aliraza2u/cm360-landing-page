@@ -17,7 +17,14 @@ export const metadata: Metadata = {
     title: "Terms & Conditions | CM360",
     description: TERMS_DESCRIPTION,
     url: `${SITE_URL}/terms`,
+    type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Terms & Conditions | CM360",
+    description: TERMS_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
 };
 
 async function getTermsMarkdown() {

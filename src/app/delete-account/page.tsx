@@ -23,7 +23,15 @@ export const metadata: Metadata = {
     description:
       "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.",
     url: `${SITE_URL}/delete-account`,
+    type: "website",
   },
+  twitter: {
+    card: "summary",
+    title: "Delete Your CM360 Account | CM360",
+    description:
+      "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.",
+  },
+  robots: { index: true, follow: true },
 };
 
 const PRIVACY_URL = `${SITE_URL}/privacy`;

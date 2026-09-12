@@ -124,11 +124,10 @@ export function Footer() {
               className="shrink-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               <Image
-                src="/icon.svg"
+                src="/brand/icon-128.png"
                 alt={`${BRAND.name} logo`}
                 width={88}
                 height={88}
-                unoptimized
                 className="h-12 w-12 object-contain md:h-[5rem] md:w-[5rem] lg:h-[5.5rem] lg:w-[5.5rem]"
               />
             </Link>
@@ -140,11 +139,11 @@ export function Footer() {
                 CM<span className="text-brand">360</span>
               </Link>
               <p className="mt-1.5 text-[0.8125rem] font-semibold tracking-[-0.015em] text-brand-deep md:mt-2 md:text-base">
-                Build Smarter. Together.
+                {BRAND.alternateName}
               </p>
               <p className="mt-2 hidden max-w-md text-sm leading-relaxed text-muted md:block md:text-[0.9375rem]">
-                The all-in-one construction management platform that keeps your projects, people and
-                progress connected.
+                Construction management software that keeps your projects, people, expenses and
+                payments connected in one platform.
               </p>
             </div>
           </div>

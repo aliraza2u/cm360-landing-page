@@ -123,11 +123,11 @@ export function MultiDeviceSection() {
             id="devices-heading"
             className="mt-3 text-[clamp(1.6rem,3.2vw,2.5rem)] font-extrabold leading-[1.12] tracking-[-0.035em] text-ink"
           >
-            Built for clarity on site and in the office
+            Manage projects from site to office
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-muted md:text-base">
-            Your team stays connected, whether they&apos;re at the construction site or in the
-            office — with real-time updates in CM360.
+            Your team stays connected whether they&apos;re on the construction site or in the
+            office — with live updates for labour, expenses and progress in CM360.
           </p>
         </div>
 

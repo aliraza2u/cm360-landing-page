@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { SITE_URL, BRAND } from "@/lib/site";
+import { SITE_URL, BRAND, SEO } from "@/lib/site";
 
 const sans = Inter({
   variable: "--font-sans",
@@ -9,61 +9,61 @@ const sans = Inter({
   display: "swap",
 });
 
+function verificationMetadata(): Metadata["verification"] {
+  const google = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION?.trim();
+  const bing = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION?.trim();
+
+  if (!google && !bing) return undefined;
+
+  return {
+    ...(google ? { google } : {}),
+    ...(bing ? { other: { "msvalidate.01": bing } } : {}),
+  };
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CM360 | Construction Management Software for Builders",
+    default: SEO.title,
     template: "%s | CM360",
   },
-  description:
-    "CM360 helps builders and construction companies manage projects, clients, labour, contractors, payments, expenses and business operations from one platform.",
+  description: SEO.description,
   applicationName: BRAND.name,
-  keywords: [
-    "construction management software",
-    "CM360",
-    "builder project management",
-    "contractor management",
-    "construction labour payroll",
-    "construction expense tracking",
-  ],
-  authors: [{ name: "CM360" }],
-  creator: "CM360",
-  publisher: "CM360",
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: BRAND.name }],
+  creator: BRAND.name,
+  publisher: BRAND.name,
   openGraph: {
     type: "website",
     locale: "en_US",
     url: SITE_URL,
     siteName: BRAND.name,
-    title: "CM360 | Construction Management Software for Builders",
-    description:
-      "Manage projects, clients, labour, contractors, payments and expenses with one construction management platform. Build. Manage. Grow.",
-    images: [
-      {
-        url: "/brand/og.png",
-        width: 512,
-        height: 512,
-        alt: "CM360 construction management platform logo",
-      },
-    ],
+    title: SEO.title,
+    description: SEO.description,
+    images: [SEO.ogImage],
   },
   twitter: {
     card: "summary",
-    title: "CM360 | Construction Management Software for Builders",
-    description:
-      "Run your construction business from one place — projects, teams, payments and expenses.",
-    images: ["/brand/og.png"],
+    title: SEO.title,
+    description: SEO.description,
+    images: [SEO.ogImage.url],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg" }],
+    icon: [
+      { url: "/favicon.png", sizes: "48x48", type: "image/png" },
+      { url: "/brand/icon-64.png", sizes: "64x64", type: "image/png" },
+      { url: "/brand/icon-128.png", sizes: "128x128", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/icon-128.png", sizes: "128x128", type: "image/png" }],
   },
+  verification: verificationMetadata(),
 };
 
 export const viewport: Viewport = {

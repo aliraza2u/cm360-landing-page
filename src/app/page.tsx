@@ -1,33 +1,89 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/sections/hero";
 import { ProblemSection } from "@/components/sections/problem";
-import { CapabilitiesSection } from "@/components/sections/capabilities";
 import { MultiDeviceSection } from "@/components/sections/multi-device";
 import { AudienceSection } from "@/components/sections/audience";
 import { ContactSection } from "@/components/sections/contact";
-import { BRAND, SITE_URL } from "@/lib/site";
+import { BRAND, SEO, SITE_URL, SOCIAL, absoluteUrl } from "@/lib/site";
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: BRAND.name,
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web, iOS, Android",
-  url: SITE_URL,
-  description:
-    "CM360 helps builders and construction companies manage projects, clients, labour, contractors, payments, expenses and business operations from one platform.",
-  offers: {
-    "@type": "Offer",
-    url: "https://app.cm360.site/signup",
+export const metadata: Metadata = {
+  title: {
+    absolute: SEO.title,
   },
-  brand: {
-    "@type": "Brand",
-    name: BRAND.name,
+  description: SEO.description,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: SEO.title,
+    description: SEO.description,
+    url: absoluteUrl("/"),
+    type: "website",
+    images: [SEO.ogImage],
+  },
+  twitter: {
+    card: "summary",
+    title: SEO.title,
+    description: SEO.description,
+    images: [SEO.ogImage.url],
   },
 };
 
+function buildJsonLd() {
+  const sameAs = [
+    SOCIAL.linkedin,
+    SOCIAL.youtube,
+    SOCIAL.facebook,
+    SOCIAL.x,
+  ].filter(Boolean);
+
+  const organization: Record<string, unknown> = {
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: BRAND.name,
+    alternateName: BRAND.alternateName,
+    url: SITE_URL,
+    logo: absoluteUrl("/brand/icon-128.png"),
+  };
+
+  if (sameAs.length > 0) {
+    organization.sameAs = sameAs;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      organization,
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: BRAND.name,
+        alternateName: BRAND.alternateName,
+        url: SITE_URL,
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        inLanguage: "en",
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": `${SITE_URL}/#software`,
+        name: BRAND.name,
+        alternateName: BRAND.alternateName,
+        applicationCategory: "BusinessApplication",
+        // Public product surface verified here is the web app — no invented store OS claims.
+        operatingSystem: "Web",
+        url: SITE_URL,
+        description: SEO.description,
+        brand: { "@id": `${SITE_URL}/#organization` },
+      },
+    ],
+  };
+}
+
 export default function Home() {
+  const jsonLd = buildJsonLd();
+
   return (
     <>
       <script
@@ -38,7 +94,6 @@ export default function Home() {
       <main id="main" className="flex-1">
         <HeroSection />
         <ProblemSection />
-        {/* <CapabilitiesSection /> */}
         <MultiDeviceSection />
         <AudienceSection />
         <ContactSection />

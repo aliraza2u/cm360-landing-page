@@ -393,10 +393,11 @@ export function ProblemSection() {
             id="problem-heading"
             className="mt-2.5 text-[clamp(1.4rem,5.2vw,2.5rem)] font-extrabold leading-[1.12] tracking-[-0.035em] text-ink"
           >
-            Projects, people &amp; money — in one place
+            Run your construction business in one place
           </h2>
           <p className="mx-auto mt-2.5 max-w-xl text-[0.95rem] leading-relaxed text-muted md:text-base">
-            Notes, chats, spreadsheets, receipts and calls — brought together in CM360.
+            Move beyond notebooks, spreadsheets and manual construction khata. CM360 keeps
+            projects, labour, contractors, expenses and payments organized in one place.
           </p>
         </div>
 

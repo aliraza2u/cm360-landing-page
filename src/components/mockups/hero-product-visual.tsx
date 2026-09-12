@@ -18,7 +18,7 @@ export function HeroProductVisual() {
       </div>
 
       {/* Mobile app overlapping bottom-left of laptop */}
-      <div className="absolute bottom-1 left-0 z-20 sm:bottom-0 sm:left-[-0.25rem] md:-bottom-1 md:left-[-0.5rem] lg:-bottom-2 lg:left-[-1.25rem] xl:left-[-2rem]">
+      <div className="absolute bottom-1 left-0 z-20 sm:bottom-0 sm:left-[-0.25rem] md:-bottom-1 md:left-[-0.5rem] lg:-bottom-2 lg:left-[-1.25rem] xl:left-[-1rem]">
         <PhoneFrame
           src="/cm-mobile-home.png"
           alt="CM360 mobile home screen with projects, quick actions and attendance"

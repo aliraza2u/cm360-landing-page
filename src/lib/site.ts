@@ -5,10 +5,43 @@ export const APP_GET_STARTED = `${APP_URL}/signup`;
 
 export const BRAND = {
   name: "CM360",
+  /** Full product name — use sparingly in visible copy; primary for schema/SEO. */
+  alternateName: "Construction Manager 360",
   wordmark: "CM360",
   product: "Construction Management Platform",
+  category: "Construction Management Software",
   tagline: "Build. Manage. Grow.",
 } as const;
+
+/** Shared SEO copy — keep titles/descriptions aligned with visible homepage content. */
+export const SEO = {
+  title: "Construction Management Software for Builders & Contractors | CM360",
+  description:
+    "CM360 is construction management software for managing projects, clients, labour, subcontractors, expenses, payments and reports in one platform.",
+  ogImage: {
+    url: "/brand/og.png",
+    width: 512,
+    height: 512,
+    alt: "CM360 — Construction Manager 360 logo",
+  },
+} as const;
+
+/**
+ * Canonical public marketing routes for sitemap / internal reference.
+ * Expand this list when dedicated content pages ship (Phase 2+).
+ */
+export const PUBLIC_PAGES = [
+  { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/delete-account", changeFrequency: "yearly" as const, priority: 0.4 },
+] as const;
+
+export function absoluteUrl(path = "/"): string {
+  // Match Next.js default trailingSlash:false — root canonical is https://cm360.site
+  if (path === "/") return SITE_URL;
+  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
 
 /**
  * Digits-only WhatsApp id for https://wa.me/{id}.

@@ -42,10 +42,11 @@ export function AudienceSection() {
             id="audience-heading"
             className="mt-2.5 text-[clamp(1.55rem,3.4vw,2.65rem)] font-extrabold leading-[1.1] tracking-[-0.035em] text-ink md:mt-3"
           >
-            Who it&apos;s for
+            Built for construction teams
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-[0.9rem] leading-relaxed text-muted md:mt-3 md:text-base">
-            From site teams to office staff, CM360 keeps everyone on the same page.
+            From builders and contractors on site to owners and office staff, CM360 keeps everyone
+            working from the same records.
           </p>
         </div>
 

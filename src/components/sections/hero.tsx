@@ -59,83 +59,74 @@ function StatusDot() {
 
 export function HeroSection() {
   return (
-    <section className="hero-cinematic relative z-[1] isolate -mt-[var(--header-h)] overflow-x-clip text-white">
+    <section
+      className="hero-cinematic relative z-[1] isolate -mt-[var(--header-h)] overflow-x-clip text-white"
+      aria-labelledby="hero-heading"
+    >
       <div className="hero-cinematic-bg" aria-hidden />
       <div className="hero-cinematic-overlay" aria-hidden />
 
       <div className="container-page relative z-10 pb-12 pt-[calc(var(--header-h)+1rem)] md:pb-20 md:pt-[calc(var(--header-h)+3.25rem)] lg:min-h-[min(100svh,52rem)] lg:pb-24 xl:pb-28">
-        {/* ——— Mobile (< lg): product-led, tighter stack ——— */}
-        <div className="flex flex-col gap-4 lg:hidden">
-          <p className="inline-flex max-w-full items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-white/85">
-            <StatusDot />
-            <span className="hero-badge-breathe truncate">{BRAND.product}</span>
-          </p>
+        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center lg:gap-8 xl:gap-10">
+          <div className="relative z-10 flex flex-col gap-4 lg:max-w-xl lg:gap-0">
+            {/* Mobile badge */}
+            <p className="inline-flex max-w-full items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-white/85 lg:hidden">
+              <StatusDot />
+              <span className="hero-badge-breathe truncate">{BRAND.product}</span>
+            </p>
 
-          <h1 className="text-[1.7rem] font-extrabold leading-[1.12] tracking-[-0.04em] text-white min-[390px]:text-[1.85rem]">
-            Run your construction business{" "}
-            <span className="text-gradient">from one place</span>
-          </h1>
-
-          <div className="mx-auto w-full max-w-[20rem] pt-1 min-[390px]:max-w-[21.5rem]">
-            <HeroProductVisual />
-          </div>
-
-          <p className="text-[0.875rem] leading-relaxed text-white/72">
-            Manage projects, clients, labour, payments and expenses — so you always know
-            what&apos;s happening.
-          </p>
-
-          <div className="flex items-center gap-2.5">
-            <Button
-              href={APP_GET_STARTED}
-              variant="primary"
-              className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
-            >
-              Get Started
-              <ArrowIcon className="h-3.5 w-3.5" />
-            </Button>
-            <Button
-              href="#multi-device"
-              variant="onDarkOutline"
-              className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
-            >
-              <PlayIcon className="h-3.5 w-3.5" />
-              How it works
-            </Button>
-          </div>
-
-          <ul
-            className="flex items-center justify-between gap-2 pt-1 text-[0.68rem] font-medium text-white/75 min-[390px]:text-[0.72rem]"
-            aria-label="Why CM360"
-          >
-            {confidenceMobile.map((item) => (
-              <li key={item} className="inline-flex min-w-0 items-center gap-1">
-                <CheckIcon className="h-3 w-3 shrink-0" />
-                <span className="truncate">{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* ——— Desktop / laptop: unchanged composition ——— */}
-        <div className="hidden items-center gap-12 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:gap-8 xl:gap-10">
-          <div className="relative z-10 max-w-xl">
-            <p className="animate-rise inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white/95 backdrop-blur-sm">
+            {/* Desktop badge */}
+            <p className="animate-rise hidden items-center rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white/95 backdrop-blur-sm lg:inline-flex">
               {BRAND.product}
             </p>
 
-            <h1 className="mt-5 animate-rise-delay-1 text-[clamp(2.5rem,5vw,4rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-white">
-              Run Your Construction Business{" "}
-              <span className="text-gradient">From One Place</span>
+            {/* One visible semantic H1 — responsive type only */}
+            <h1
+              id="hero-heading"
+              className="text-[1.55rem] font-extrabold leading-[1.12] tracking-[-0.04em] text-white min-[390px]:text-[1.75rem] lg:mt-5 lg:animate-rise-delay-1 lg:text-[clamp(2.25rem,4.6vw,3.65rem)] lg:leading-[1.05] lg:tracking-[-0.045em]"
+            >
+              Construction Management Software{" "}
+              <span className="text-gradient">for Builders &amp; Contractors</span>
             </h1>
 
-            <p className="mt-5 animate-rise-delay-2 text-[clamp(0.95rem,1.5vw,1.125rem)] leading-[1.7] text-white/78">
-              CM360 helps you manage projects, clients, labour, contractors, payments, expenses
-              and more — so you always know what&apos;s happening across your construction
-              business.
+            {/* Mobile product visual sits between headline and supporting copy */}
+            <div className="mx-auto w-full max-w-[20rem] pt-1 min-[390px]:max-w-[21.5rem] lg:hidden">
+              <HeroProductVisual />
+            </div>
+
+            <p className="text-[0.875rem] leading-relaxed text-white/72 lg:hidden">
+              CM360 helps construction companies manage projects, clients, labour, subcontractors,
+              expenses, payments and reports from one platform.
             </p>
 
-            <div className="mt-8 flex animate-rise-delay-2 flex-wrap items-center gap-3">
+            <p className="mt-5 hidden animate-rise-delay-2 text-[clamp(0.95rem,1.5vw,1.125rem)] leading-[1.7] text-white/78 lg:block">
+              CM360 — Construction Manager 360 — helps construction companies manage projects,
+              clients, labour, subcontractors, expenses, payments and business reports from one
+              platform.
+            </p>
+
+            {/* Mobile CTAs */}
+            <div className="flex items-center gap-2.5 lg:hidden">
+              <Button
+                href={APP_GET_STARTED}
+                variant="primary"
+                className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
+              >
+                Get Started
+                <ArrowIcon className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                href="#multi-device"
+                variant="onDarkOutline"
+                className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
+              >
+                <PlayIcon className="h-3.5 w-3.5" />
+                How it works
+              </Button>
+            </div>
+
+            {/* Desktop CTAs */}
+            <div className="mt-8 hidden animate-rise-delay-2 flex-wrap items-center gap-3 lg:flex">
               <Button href={APP_GET_STARTED} variant="primary" className="gap-2 px-6">
                 Get Started
                 <ArrowIcon className="h-4 w-4" />
@@ -147,7 +138,19 @@ export function HeroSection() {
             </div>
 
             <ul
-              className="mt-8 flex animate-rise-delay-3 flex-wrap gap-2.5"
+              className="flex items-center justify-between gap-2 pt-1 text-[0.68rem] font-medium text-white/75 min-[390px]:text-[0.72rem] lg:hidden"
+              aria-label="Why CM360"
+            >
+              {confidenceMobile.map((item) => (
+                <li key={item} className="inline-flex min-w-0 items-center gap-1">
+                  <CheckIcon className="h-3 w-3 shrink-0" />
+                  <span className="truncate">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <ul
+              className="mt-8 hidden animate-rise-delay-3 flex-wrap gap-2.5 lg:flex"
               aria-label="Why CM360"
             >
               {confidence.map((item) => (
@@ -162,7 +165,7 @@ export function HeroSection() {
             </ul>
           </div>
 
-          <div className="animate-fade relative z-10 lg:pl-2">
+          <div className="animate-fade relative z-10 hidden lg:block lg:pl-2">
             <HeroProductVisual />
           </div>
         </div>
