@@ -4,7 +4,21 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
-import { APP_GET_STARTED, APP_SIGN_IN, BRAND, NAV_LINKS } from "@/lib/site";
+import { AndroidMark } from "@/components/android/android-mark";
+import {
+  ANDROID_DOWNLOAD_HREF,
+  APP_GET_STARTED,
+  APP_SIGN_IN,
+  BRAND,
+  NAV_LINKS,
+} from "@/lib/site";
+
+function resolveNavHref(href: string, pathname: string) {
+  if (href.startsWith("#") && pathname !== "/") {
+    return `/${href}`;
+  }
+  return href;
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -54,7 +68,7 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
-              href={link.href}
+              href={resolveNavHref(link.href, pathname)}
               className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                 solid
                   ? "text-ink-secondary hover:bg-brand-soft/80 hover:text-ink"
@@ -118,7 +132,7 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
-                href={link.href}
+                href={resolveNavHref(link.href, pathname)}
                 className="rounded-xl px-3 py-3 text-base font-medium text-ink"
                 onClick={() => setOpen(false)}
               >
@@ -126,6 +140,16 @@ export function Header() {
               </a>
             ))}
             <div className="mt-3 grid gap-2 border-t border-[rgba(22,119,255,0.12)] pt-4">
+              <Button
+                href={ANDROID_DOWNLOAD_HREF}
+                variant="secondary"
+                onClick={() => setOpen(false)}
+                aria-label="Download the official CM360 Android APK"
+                className="gap-2"
+              >
+                <AndroidMark size={18} className="h-[1.125rem] w-[1.125rem] shrink-0" />
+                Android App
+              </Button>
               <Button href={APP_SIGN_IN} variant="secondary" onClick={() => setOpen(false)}>
                 Sign In
               </Button>

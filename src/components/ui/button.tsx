@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { ANDROID_FILE_PATH } from "@/lib/android-paths";
 
 type Variant = "primary" | "secondary" | "ghost" | "outline" | "onDark" | "onDarkOutline";
 
@@ -21,6 +22,12 @@ type CommonProps = {
   variant?: Variant;
   className?: string;
   children: ReactNode;
+  /**
+   * Force a plain <a> instead of Next.js Link.
+   * Required for download endpoints that 302 to an external APK host —
+   * Link/RSC fetches follow the redirect and hit CORS.
+   */
+  native?: boolean;
 };
 
 type ButtonAsButton = CommonProps &
@@ -29,7 +36,7 @@ type ButtonAsButton = CommonProps &
   };
 
 type ButtonAsLink = CommonProps &
-  Omit<ComponentProps<typeof Link>, "className" | "children"> & {
+  Omit<ComponentProps<"a">, "className" | "children" | "href"> & {
     href: string;
   };
 
@@ -42,13 +49,19 @@ function isExternalHref(href: string) {
   return /^(https?:|mailto:|tel:)/i.test(href);
 }
 
+/** Routes that redirect off-origin must not use App Router client navigation. */
+function isNativeNavigationHref(href: string) {
+  const path = href.split("?")[0] ?? href;
+  return path === ANDROID_FILE_PATH || path.endsWith("/download/android/file");
+}
+
 export function Button(props: ButtonProps) {
-  const { variant = "primary", className = "", children, ...rest } = props;
+  const { variant = "primary", className = "", children, native = false, ...rest } = props;
   const classes = `${base} ${variants[variant]} ${className}`;
 
   if ("href" in rest && rest.href) {
     const { href, ...linkRest } = rest;
-    if (isExternalHref(href)) {
+    if (native || isExternalHref(href) || isNativeNavigationHref(href)) {
       return (
         <a href={href} className={classes} {...(linkRest as ComponentProps<"a">)}>
           {children}
@@ -56,7 +69,7 @@ export function Button(props: ButtonProps) {
       );
     }
     return (
-      <Link href={href} className={classes} {...linkRest}>
+      <Link href={href} className={classes} {...(linkRest as Omit<ComponentProps<typeof Link>, "href" | "className" | "children">)}>
         {children}
       </Link>
     );

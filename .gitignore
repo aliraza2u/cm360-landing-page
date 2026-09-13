@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# Android release binaries (metadata is committed via src/data/android-release.json)
+/public/downloads/*.apk
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -34,6 +34,8 @@ export const SEO = {
  */
 export const PUBLIC_PAGES = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
+  // Official Android distribution page (functional, not a thin SEO target).
+  { path: "/download/android", changeFrequency: "monthly" as const, priority: 0.6 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/delete-account", changeFrequency: "yearly" as const, priority: 0.4 },
@@ -119,8 +121,12 @@ export function supportMailto(subject = "CM360 Support") {
 export const NAV_LINKS = [
   { href: "#multi-device", label: "How It Works" },
   { href: "#who-its-for", label: "Who It’s For" },
+  { href: "#android-download", label: "Android" },
   { href: "#contact", label: "Contact" },
 ] as const;
+
+/** Stable Android download page — use for CTAs and QR destinations. */
+export const ANDROID_DOWNLOAD_HREF = "/download/android";
 
 /** Optional public social profiles — icons render only when a URL is set. */
 export const SOCIAL: {

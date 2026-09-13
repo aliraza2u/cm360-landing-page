@@ -1,5 +1,6 @@
-import { APP_GET_STARTED, BRAND } from "@/lib/site";
+import { APP_GET_STARTED, ANDROID_DOWNLOAD_HREF, BRAND } from "@/lib/site";
 import { Button } from "@/components/ui/button";
+import { AndroidMark } from "@/components/android/android-mark";
 import { HeroProductVisual } from "@/components/mockups/hero-product-visual";
 
 const confidence = [
@@ -21,15 +22,6 @@ function CheckIcon({ className = "" }: { className?: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
-  );
-}
-
-function PlayIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 20 20" fill="none" aria-hidden>
-      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M8.2 6.8v6.4L13.6 10 8.2 6.8Z" fill="currentColor" />
     </svg>
   );
 }
@@ -68,16 +60,18 @@ export function HeroSection() {
 
       <div className="container-page relative z-10 pb-12 pt-[calc(var(--header-h)+1rem)] md:pb-20 md:pt-[calc(var(--header-h)+3.25rem)] lg:min-h-[min(100svh,52rem)] lg:pb-24 xl:pb-28">
         <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center lg:gap-8 xl:gap-10">
-          <div className="relative z-10 flex flex-col gap-4 lg:max-w-xl lg:gap-0">
-            {/* Mobile badge */}
-            <p className="inline-flex max-w-full items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.1em] text-white/85 lg:hidden">
+          <div className="relative z-10 flex min-w-0 flex-col gap-4 lg:max-w-xl lg:gap-0">
+            {/* Mobile badge — tight tracking; min-w-0 so truncate can shrink */}
+            <p className="inline-flex max-w-full min-w-0 items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.04em] text-white/85 lg:hidden">
               <StatusDot />
-              <span className="hero-badge-breathe truncate">{BRAND.product}</span>
+              <span className="hero-badge-breathe min-w-0 truncate">
+                {BRAND.product}
+              </span>
             </p>
 
-            {/* Desktop badge */}
-            <p className="animate-rise hidden items-center rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-white/95 backdrop-blur-sm lg:inline-flex">
-              {BRAND.product}
+            {/* Desktop badge — w-fit so it doesn’t reserve excess horizontal space */}
+            <p className="animate-rise hidden w-fit max-w-full items-center rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.045em] text-white/95 backdrop-blur-sm lg:inline-flex">
+              <span className="leading-none">{BRAND.product}</span>
             </p>
 
             {/* One visible semantic H1 — responsive type only */}
@@ -105,24 +99,27 @@ export function HeroSection() {
               platform.
             </p>
 
-            {/* Mobile CTAs */}
-            <div className="flex items-center gap-2.5 lg:hidden">
-              <Button
-                href={APP_GET_STARTED}
-                variant="primary"
-                className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
-              >
-                Get Started
-                <ArrowIcon className="h-3.5 w-3.5" />
-              </Button>
-              <Button
-                href="#multi-device"
-                variant="onDarkOutline"
-                className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
-              >
-                <PlayIcon className="h-3.5 w-3.5" />
-                How it works
-              </Button>
+            {/* Mobile CTAs — Android download is more useful on phone */}
+            <div className="flex flex-col gap-2.5 lg:hidden">
+              <div className="flex items-center gap-2.5">
+                <Button
+                  href={APP_GET_STARTED}
+                  variant="primary"
+                  className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
+                >
+                  Get Started
+                  <ArrowIcon className="h-3.5 w-3.5" />
+                </Button>
+                <Button
+                  href={ANDROID_DOWNLOAD_HREF}
+                  variant="onDarkOutline"
+                  className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
+                  aria-label="Download the official CM360 Android APK"
+                >
+                  <AndroidMark size={14} className="h-3.5 w-3.5 shrink-0" />
+                  Android App
+                </Button>
+              </div>
             </div>
 
             {/* Desktop CTAs */}
@@ -131,9 +128,14 @@ export function HeroSection() {
                 Get Started
                 <ArrowIcon className="h-4 w-4" />
               </Button>
-              <Button href="#multi-device" variant="onDarkOutline" className="gap-2">
-                <PlayIcon className="h-4 w-4" />
-                See How It Works
+              <Button
+                href={ANDROID_DOWNLOAD_HREF}
+                variant="onDarkOutline"
+                className="gap-2 border-white/30 bg-transparent text-white/90 hover:bg-white/10"
+                aria-label="Download the official CM360 Android APK"
+              >
+                <AndroidMark size={16} className="h-4 w-4 shrink-0" />
+                Android App
               </Button>
             </div>
 

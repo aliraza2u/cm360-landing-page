@@ -21,6 +21,7 @@ const BG = publicAsset("assets/footer/bg.png");
 const EXPLORE_LINKS = [
   { href: "/#multi-device", label: "How It Works" },
   { href: "/#who-its-for", label: "Who It’s For" },
+  { href: "/download/android", label: "Download Android" },
   { href: "/#contact", label: "Contact" },
 ] as const;
 
