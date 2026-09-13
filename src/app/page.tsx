@@ -45,7 +45,7 @@ function buildJsonLd() {
     name: BRAND.name,
     alternateName: BRAND.alternateName,
     url: SITE_URL,
-    logo: absoluteUrl("/brand/icon-128.png"),
+    logo: absoluteUrl("/icon.svg"),
   };
 
   if (sameAs.length > 0) {

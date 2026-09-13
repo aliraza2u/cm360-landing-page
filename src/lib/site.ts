@@ -19,6 +19,8 @@ export const SEO = {
   description:
     "CM360 is construction management software for managing projects, clients, labour, subcontractors, expenses, payments and reports in one platform.",
   ogImage: {
+    // Raster OG asset regenerated from public/icon.svg (transparent).
+    // Social crawlers do not reliably support SVG for og:image.
     url: "/brand/og.png",
     width: 512,
     height: 512,

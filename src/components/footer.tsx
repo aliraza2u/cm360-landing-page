@@ -124,10 +124,11 @@ export function Footer() {
               className="shrink-0 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
             >
               <Image
-                src="/brand/icon-128.png"
+                src="/icon.svg"
                 alt={`${BRAND.name} logo`}
                 width={88}
                 height={88}
+                unoptimized
                 className="h-12 w-12 object-contain md:h-[5rem] md:w-[5rem] lg:h-[5.5rem] lg:w-[5.5rem]"
               />
             </Link>

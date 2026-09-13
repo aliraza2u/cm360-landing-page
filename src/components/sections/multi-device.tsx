@@ -19,11 +19,16 @@ const ASSETS = {
   bg: publicAsset("assets/multi-device/multi-device-bg.png"),
   mobile: publicAsset("assets/multi-device/mobile-view.png"),
   laptop: publicAsset("assets/multi-device/laptop-view.png"),
+  /** Landscape sync graphic for md+ horizontal layout */
   connecting: publicAsset("assets/multi-device/connecting.png"),
+  /** Portrait sync graphic for mobile vertical stack */
+  connectingMob: publicAsset("assets/multi-device/connecting-mob.png"),
 } as const;
 
 const MOBILE_SIZE = { width: 826, height: 1798 } as const;
 const LAPTOP_SIZE = { width: 2302, height: 1716 } as const;
+const CONNECTING_SIZE = { width: 1672, height: 941 } as const;
+const CONNECTING_MOB_SIZE = { width: 941, height: 1672 } as const;
 
 const outcomes = [
   {
@@ -157,8 +162,8 @@ export function MultiDeviceSection() {
               <Image
                 src={ASSETS.connecting}
                 alt=""
-                width={1672}
-                height={941}
+                width={CONNECTING_SIZE.width}
+                height={CONNECTING_SIZE.height}
                 unoptimized
                 className="h-auto w-full mix-blend-lighten"
               />
@@ -220,13 +225,13 @@ export function MultiDeviceSection() {
               />
             </div>
 
-            {/* Connector + sync title between devices */}
+            {/* Portrait connector between stacked devices */}
             <div className="multi-device-connector relative z-[5] flex flex-col items-center justify-center">
               <Image
-                src={ASSETS.connecting}
+                src={ASSETS.connectingMob}
                 alt=""
-                width={400}
-                height={225}
+                width={CONNECTING_MOB_SIZE.width}
+                height={CONNECTING_MOB_SIZE.height}
                 unoptimized
                 className="multi-device-connector-img mix-blend-lighten"
                 aria-hidden
