@@ -2,7 +2,14 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 import { ANDROID_FILE_PATH } from "@/lib/android-paths";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline" | "onDark" | "onDarkOutline";
+type Variant =
+  | "primary"
+  | "secondary"
+  | "ghost"
+  | "outline"
+  | "onDark"
+  | "onDarkOutline"
+  | "android";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -16,6 +23,8 @@ const variants: Record<Variant, string> = {
     "bg-white text-brand-deep shadow-sm hover:bg-white/95 hover:-translate-y-px",
   onDarkOutline:
     "bg-white/10 text-white border border-white/45 backdrop-blur-sm hover:bg-white/18",
+  // Visuals live in globals.css (.cta-android) — glass fill, inset ring and motion.
+  android: "cta-android",
 };
 
 type CommonProps = {

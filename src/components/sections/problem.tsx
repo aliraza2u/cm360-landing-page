@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import { PhoneFrame } from "@/components/mockups/device-frames";
 
@@ -21,113 +20,23 @@ const ASSETS = {
   problem: publicAsset("assets/solution/problem.png"),
   solution: publicAsset("assets/solution/solution.png"),
   app: publicAsset("assets/solution/app.png"),
+  /*
+   * The mobile artwork is heavy (~1.5 MB each), so it goes through the Next
+   * image optimizer instead of being served raw. That rules out the
+   * `publicAsset` cache-busting query — `images.localPatterns` rejects a search
+   * string on local sources.
+   */
+  mobProblem: "/assets/solution/mob-problem.png",
+  mobSolution: "/assets/solution/mob-solution.png",
 } as const;
 
 const APP_SIZE = { width: 834, height: 1608 } as const;
 const PROBLEM_SIZE = { width: 1448, height: 1086 } as const;
 const SOLUTION_SIZE = { width: 1312, height: 1199 } as const;
+const MOB_PROBLEM_SIZE = { width: 1024, height: 1536 } as const;
+const MOB_SOLUTION_SIZE = { width: 1536, height: 1024 } as const;
 
-type ModuleCard = {
-  id: string;
-  title: string;
-  chips: readonly [string, string];
-  accent: string;
-  soft: string;
-  glow: string;
-  icon: "folder" | "people" | "handshake" | "wallet" | "chart" | "gear";
-};
-
-const MODULES: readonly ModuleCard[] = [
-  {
-    id: "projects",
-    title: "Projects",
-    chips: ["Projects", "Clients"],
-    accent: "#1677ff",
-    soft: "#edf6ff",
-    glow: "rgba(22, 119, 255, 0.28)",
-    icon: "folder",
-  },
-  {
-    id: "people",
-    title: "People",
-    chips: ["Labour", "Attendance"],
-    accent: "#16a34a",
-    soft: "#ecfdf5",
-    glow: "rgba(22, 163, 74, 0.28)",
-    icon: "people",
-  },
-  {
-    id: "contractors",
-    title: "Contractors",
-    chips: ["Vendors", "Subcontractors"],
-    accent: "#f97316",
-    soft: "#fff7ed",
-    glow: "rgba(249, 115, 22, 0.28)",
-    icon: "handshake",
-  },
-  {
-    id: "money",
-    title: "Money",
-    chips: ["Payments", "Expenses"],
-    accent: "#7c3aed",
-    soft: "#f5f3ff",
-    glow: "rgba(124, 58, 237, 0.28)",
-    icon: "wallet",
-  },
-  {
-    id: "reports",
-    title: "Reports",
-    chips: ["Insights", "Performance"],
-    accent: "#db2777",
-    soft: "#fdf2f8",
-    glow: "rgba(219, 39, 119, 0.28)",
-    icon: "chart",
-  },
-  {
-    id: "company",
-    title: "Company",
-    chips: ["Users", "Settings"],
-    accent: "#0ea5e9",
-    soft: "#ecfeff",
-    glow: "rgba(14, 165, 233, 0.28)",
-    icon: "gear",
-  },
-] as const;
-
-const OUTCOMES = [
-  {
-    id: "connected",
-    title: "Connected data",
-    detail: "Everything works together.",
-    accent: "#1677ff",
-    soft: "#edf6ff",
-    icon: "link" as const,
-  },
-  {
-    id: "manual",
-    title: "Less manual work",
-    detail: "Get more done, faster.",
-    accent: "#16a34a",
-    soft: "#ecfdf5",
-    icon: "bolt" as const,
-  },
-  {
-    id: "decisions",
-    title: "Clearer decisions",
-    detail: "Turn data into action.",
-    accent: "#f97316",
-    soft: "#fff7ed",
-    icon: "bars" as const,
-  },
-  {
-    id: "business",
-    title: "A stronger business",
-    detail: "Build for what's next.",
-    accent: "#7c3aed",
-    soft: "#f5f3ff",
-    icon: "trend" as const,
-  },
-] as const;
+const BRIDGE_PROOFS = ["One app", "Real-time sync", "Site + office"] as const;
 
 function SideLabel({
   children,
@@ -153,14 +62,12 @@ function KnockoutImage({
   width,
   height,
   className = "",
-  priority = false,
 }: {
   src: string;
   alt: string;
   width: number;
   height: number;
   className?: string;
-  priority?: boolean;
 }) {
   return (
     <Image
@@ -168,212 +75,122 @@ function KnockoutImage({
       alt={alt}
       width={width}
       height={height}
-      priority={priority}
       unoptimized
       className={`h-auto w-full mix-blend-lighten ${className}`}
     />
   );
 }
 
-function OutcomeIcon({
-  name,
-  className = "h-4 w-4",
+function StepPill({
+  tone,
+  children,
 }: {
-  name: (typeof OUTCOMES)[number]["icon"];
-  className?: string;
+  tone: "problem" | "solution";
+  children: string;
 }) {
-  const common = {
-    className,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.85,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true as const,
-  };
-
-  switch (name) {
-    case "link":
-      return (
-        <svg {...common}>
-          <ellipse cx="9" cy="12" rx="3.2" ry="5" />
-          <ellipse cx="15" cy="12" rx="3.2" ry="5" />
-          <path d="M9 8.5h6M9 15.5h6" />
-        </svg>
-      );
-    case "bolt":
-      return (
-        <svg {...common} fill="currentColor" stroke="none">
-          <path d="M13 2 4 14h7l-1 8 10-14h-7l0-6Z" />
-        </svg>
-      );
-    case "bars":
-      return (
-        <svg {...common}>
-          <path d="M4.5 19.5h15M7.5 16.5v-4M12 16.5V8.5M16.5 16.5v-6" />
-        </svg>
-      );
-    case "trend":
-      return (
-        <svg {...common}>
-          <path d="M4 16.5 10 10.5l3.5 3.5L20 7.5" />
-          <path d="M14.5 7.5H20v5.5" />
-        </svg>
-      );
-  }
-}
-
-function ModuleIcon({
-  name,
-  className = "h-4 w-4",
-}: {
-  name: ModuleCard["icon"];
-  className?: string;
-}) {
-  const common = {
-    className,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 1.9,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    "aria-hidden": true as const,
-  };
-
-  switch (name) {
-    case "folder":
-      return (
-        <svg {...common}>
-          <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h4l2 2H18.5A1.5 1.5 0 0 1 20 9.5v8A1.5 1.5 0 0 1 18.5 19h-13A1.5 1.5 0 0 1 4 17.5v-10Z" />
-        </svg>
-      );
-    case "people":
-      return (
-        <svg {...common}>
-          <circle cx="9" cy="8" r="2.5" />
-          <circle cx="16" cy="9" r="2" />
-          <path d="M4.2 18a4.8 4.8 0 0 1 9.6 0M14 18a3.6 3.6 0 0 1 5.6-3" />
-        </svg>
-      );
-    case "handshake":
-      return (
-        <svg {...common}>
-          <path d="M7.5 13.2 5.2 11l2.1-2.1 3.9 3.4 2.8-2.3 3.8 3.3-2 1.9-2.9-2.5-2.5 2.1-1.9-1.6Z" />
-          <path d="M5.2 11 3.8 9.7M18.6 13.8l1.4 1.2" />
-        </svg>
-      );
-    case "wallet":
-      return (
-        <svg {...common}>
-          <rect x="3.5" y="7" width="17" height="11.5" rx="2" />
-          <path d="M3.5 10H20" />
-          <circle cx="16.5" cy="14.2" r="1.1" fill="currentColor" stroke="none" />
-        </svg>
-      );
-    case "chart":
-      return (
-        <svg {...common}>
-          <path d="M4.5 19.5h15M7.5 16.5v-4M12 16.5V8.5M16.5 16.5v-6" />
-        </svg>
-      );
-    case "gear":
-      return (
-        <svg {...common}>
-          <circle cx="12" cy="12" r="3" />
-          <path d="M12 3.8v2M12 18.2v2M3.8 12h2M18.2 12h2M6 6l1.4 1.4M16.6 16.6 18 18M18 6l-1.4 1.4M7.4 16.6 6 18" />
-        </svg>
-      );
-  }
-}
-
-function ModuleCard({ item }: { item: ModuleCard }) {
+  const isProblem = tone === "problem";
   return (
-    <article
-      className="problem-module-card"
-      style={
-        {
-          "--module-accent": item.accent,
-          "--module-glow": item.glow,
-        } as CSSProperties
-      }
+    <p
+      className={`inline-flex items-center gap-2 rounded-full border bg-white/85 px-3 py-1.5 text-[0.66rem] font-bold uppercase tracking-[0.13em] shadow-[0_6px_16px_rgba(11,35,68,0.07)] backdrop-blur-sm ${
+        isProblem ? "border-[#f2dcb8] text-ink-secondary" : "border-brand/20 text-brand"
+      }`}
     >
-      <span className="problem-module-tab" aria-hidden />
-      <div className="problem-module-shell">
-        <div className="problem-module-face">
-          <div className="flex items-start gap-2">
-            <span
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.7rem]"
-              style={{ backgroundColor: item.soft, color: item.accent }}
-              aria-hidden
-            >
-              <ModuleIcon name={item.icon} className="h-[1.05rem] w-[1.05rem]" />
+      <span
+        className={`h-1.5 w-1.5 rounded-full ${isProblem ? "bg-amber" : "bg-brand"}`}
+        aria-hidden
+      />
+      {children}
+    </p>
+  );
+}
+
+/** The hinge of the mobile story: CM360 sits between the mess and the fix. */
+function SolutionBridgeCard() {
+  return (
+    <div className="relative w-full max-w-[19rem]">
+      <span className="problem-bridge-halo" aria-hidden />
+      <div className="problem-bridge-card px-4 py-4">
+        <div className="relative flex items-center gap-3">
+          <span className="problem-bridge-logo" aria-hidden>
+            <Image
+              src="/icon.svg"
+              alt=""
+              width={32}
+              height={32}
+              unoptimized
+              className="h-[1.55rem] w-[1.55rem] object-contain"
+            />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-[0.62rem] font-bold uppercase tracking-[0.16em] text-white/65">
+              The solution
             </span>
-            <div className="min-w-0 flex-1">
-              <h3 className="text-[0.9rem] font-bold leading-tight tracking-[-0.02em] text-ink">
-                {item.title}
-              </h3>
-              <ul className="mt-1.5 flex flex-wrap gap-1">
-                {item.chips.map((chip) => (
-                  <li
-                    key={chip}
-                    className="rounded-full bg-[#eef4fb] px-1.5 py-0.5 text-[0.6rem] font-medium leading-tight text-ink-secondary"
-                  >
-                    {chip}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+            <span className="mt-0.5 block text-[1.15rem] font-extrabold leading-none tracking-[-0.025em] text-white">
+              CM<span className="text-[#a5ecfa]">360</span>
+            </span>
+          </span>
         </div>
+
+        <p className="relative mt-3 text-[0.82rem] font-medium leading-snug text-white/90">
+          Every note, chat, sheet and receipt above — handled in one app.
+        </p>
+
+        <ul className="relative mt-3 flex flex-wrap gap-1.5">
+          {BRIDGE_PROOFS.map((proof) => (
+            <li
+              key={proof}
+              className="rounded-full bg-white/18 px-2 py-0.5 text-[0.62rem] font-semibold leading-tight text-white ring-1 ring-inset ring-white/25"
+            >
+              {proof}
+            </li>
+          ))}
+        </ul>
       </div>
-    </article>
+    </div>
   );
 }
 
-function OutcomesPanel() {
+/** Mobile: scattered records → CM360 → connected workspace, stacked vertically. */
+function MobileProblemSolutionFlow() {
   return (
-    <ul className="problem-outcomes mt-6 overflow-hidden rounded-[1.35rem] border border-[#e8eef6] bg-white shadow-[0_14px_40px_rgba(11,35,68,0.07)]">
-      {OUTCOMES.map((item, index) => (
-        <li
-          key={item.id}
-          className={`flex items-start gap-2.5 px-3.5 py-3.5 ${
-            index % 2 === 1 ? "border-l border-[#e8eef6]" : ""
-          } ${index > 1 ? "border-t border-[#e8eef6]" : ""}`}
-        >
-          <span
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
-            style={{ backgroundColor: item.soft, color: item.accent }}
-          >
-            <OutcomeIcon name={item.icon} />
-          </span>
-          <span className="min-w-0 pt-0.5">
-            <span className="block text-[0.8125rem] font-bold leading-snug tracking-[-0.02em] text-ink">
-              {item.title}
-            </span>
-            <span className="mt-0.5 block text-[0.7rem] leading-snug text-muted">
-              {item.detail}
-            </span>
-          </span>
-        </li>
-      ))}
-    </ul>
-  );
-}
+    <div className="mx-auto mt-6 flex w-full max-w-[22rem] flex-col items-center sm:max-w-[28rem] md:hidden">
+      <StepPill tone="problem">Scattered records</StepPill>
+      <Image
+        src={ASSETS.mobProblem}
+        alt="Construction records scattered across site notes, chat messages, spreadsheets, phone calls and paper receipts"
+        width={MOB_PROBLEM_SIZE.width}
+        height={MOB_PROBLEM_SIZE.height}
+        sizes="100vw"
+        className="problem-mob-art problem-mob-art--problem"
+      />
 
-/** Mobile: reference-style module grid + outcomes panel. */
-function MobileConnectedHub() {
-  return (
-    <div className="mx-auto mt-7 w-full max-w-[28rem] md:hidden">
-      <ul className="grid grid-cols-2 gap-3 min-[390px]:gap-3.5">
-        {MODULES.map((item) => (
-          <li key={item.id}>
-            <ModuleCard item={item} />
-          </li>
-        ))}
-      </ul>
-      <OutcomesPanel />
+      <span className="problem-flow-rail" aria-hidden />
+      <SolutionBridgeCard />
+      <span className="problem-flow-rail" aria-hidden />
+      <svg
+        className="-mt-1 h-3.5 w-3.5 text-cyan"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.6}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+
+      <div className="mt-3">
+        <StepPill tone="solution">One connected workspace</StepPill>
+      </div>
+      <Image
+        src={ASSETS.mobSolution}
+        alt="CM360 keeping projects, clients, labour, contractors, payments and reports in sync"
+        width={MOB_SOLUTION_SIZE.width}
+        height={MOB_SOLUTION_SIZE.height}
+        sizes="120vw"
+        className="problem-mob-art problem-mob-art--solution"
+      />
     </div>
   );
 }
@@ -412,7 +229,6 @@ export function ProblemSection() {
                   alt="Scattered construction records across notebooks, messages, spreadsheets, calls and receipts"
                   width={PROBLEM_SIZE.width}
                   height={PROBLEM_SIZE.height}
-                  priority
                   className="mx-auto max-h-[22rem] object-contain object-center lg:max-h-[26rem] xl:max-h-[28rem]"
                 />
               </div>
@@ -429,7 +245,6 @@ export function ProblemSection() {
                   alt="CM360 mobile project overview bringing records into one place"
                   width={APP_SIZE.width}
                   height={APP_SIZE.height}
-                  priority
                   unoptimized
                   className="!w-[10.75rem] lg:!w-[12.25rem] xl:!w-[13rem]"
                 />
@@ -444,7 +259,6 @@ export function ProblemSection() {
                   alt="CM360 connected workspace with projects, clients, labour, payments and reports in sync"
                   width={SOLUTION_SIZE.width}
                   height={SOLUTION_SIZE.height}
-                  priority
                   className="mx-auto max-h-[22rem] object-contain object-center lg:max-h-[26rem] xl:max-h-[28rem]"
                 />
               </div>
@@ -452,8 +266,8 @@ export function ProblemSection() {
           </div>
         </div>
 
-        {/* ——— Mobile: reference module cards + outcomes ——— */}
-        <MobileConnectedHub />
+        {/* ——— Mobile: vertical problem → CM360 → solution story ——— */}
+        <MobileProblemSolutionFlow />
       </div>
     </section>
   );

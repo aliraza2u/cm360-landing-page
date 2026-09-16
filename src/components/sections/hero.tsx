@@ -1,6 +1,6 @@
-import { APP_GET_STARTED, ANDROID_DOWNLOAD_HREF, BRAND } from "@/lib/site";
+import { APP_GET_STARTED, BRAND } from "@/lib/site";
 import { Button } from "@/components/ui/button";
-import { AndroidMark } from "@/components/android/android-mark";
+import { AndroidAppCta } from "@/components/android/android-app-cta";
 import { HeroProductVisual } from "@/components/mockups/hero-product-visual";
 
 const confidence = [
@@ -59,8 +59,8 @@ export function HeroSection() {
       <div className="hero-cinematic-overlay" aria-hidden />
 
       <div className="container-page relative z-10 pb-12 pt-[calc(var(--header-h)+1rem)] md:pb-20 md:pt-[calc(var(--header-h)+3.25rem)] lg:min-h-[min(100svh,52rem)] lg:pb-24 xl:pb-28">
-        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center lg:gap-8 xl:gap-10">
-          <div className="relative z-10 flex min-w-0 flex-col gap-4 lg:max-w-xl lg:gap-0">
+        <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:items-center lg:gap-8 xl:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] xl:gap-10">
+          <div className="relative z-10 flex min-w-0 flex-col gap-4 lg:max-w-xl lg:gap-0 xl:max-w-none">
             {/* Mobile badge — tight tracking; min-w-0 so truncate can shrink */}
             <p className="inline-flex max-w-full min-w-0 items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.04em] text-white/85 lg:hidden">
               <StatusDot />
@@ -77,7 +77,7 @@ export function HeroSection() {
             {/* One visible semantic H1 — responsive type only */}
             <h1
               id="hero-heading"
-              className="text-[1.55rem] font-extrabold leading-[1.12] tracking-[-0.04em] text-white min-[390px]:text-[1.75rem] lg:mt-5 lg:animate-rise-delay-1 lg:text-[clamp(2.25rem,4.6vw,3.65rem)] lg:leading-[1.05] lg:tracking-[-0.045em]"
+              className="text-[1.55rem] font-extrabold leading-[1.12] tracking-[-0.04em] text-white min-[390px]:text-[1.75rem] lg:mt-5 lg:animate-rise-delay-1 lg:text-[clamp(2.25rem,4.6vw,3.65rem)] lg:leading-[1.05] lg:tracking-[-0.045em] xl:text-[clamp(2.4rem,2.85vw,2.95rem)] xl:text-balance"
             >
               Construction Management Software{" "}
               <span className="text-gradient">for Builders &amp; Contractors</span>
@@ -110,15 +110,12 @@ export function HeroSection() {
                   Get Started
                   <ArrowIcon className="h-3.5 w-3.5" />
                 </Button>
-                <Button
-                  href={ANDROID_DOWNLOAD_HREF}
-                  variant="onDarkOutline"
-                  className="h-11 flex-1 gap-1.5 px-3 text-[0.8125rem]"
-                  aria-label="Download the official CM360 Android APK"
-                >
-                  <AndroidMark size={14} className="h-3.5 w-3.5 shrink-0" />
-                  Android App
-                </Button>
+                <AndroidAppCta
+                  wrapClassName="flex-1"
+                  className="h-11 gap-1.5 px-2.5 text-[0.8125rem]"
+                  label="Android App"
+                  compact
+                />
               </div>
             </div>
 
@@ -128,15 +125,7 @@ export function HeroSection() {
                 Get Started
                 <ArrowIcon className="h-4 w-4" />
               </Button>
-              <Button
-                href={ANDROID_DOWNLOAD_HREF}
-                variant="onDarkOutline"
-                className="gap-2 border-white/30 bg-transparent text-white/90 hover:bg-white/10"
-                aria-label="Download the official CM360 Android APK"
-              >
-                <AndroidMark size={16} className="h-4 w-4 shrink-0" />
-                Android App
-              </Button>
+              <AndroidAppCta className="gap-2.5 px-6" />
             </div>
 
             <ul

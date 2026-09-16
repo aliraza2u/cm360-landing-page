@@ -267,6 +267,109 @@ body {
   }
 }
 
+/* Android app CTA — the flagship hero action ————————————————————
+ * Navy glass with a cyan edge: same accent family as the hero status dot and
+ * headline gradient, so it separates from the filled blue primary by treatment
+ * (glass vs solid) rather than by an off-palette hue. A low-frequency halo +
+ * sheen pull the eye without becoming a distraction. The 1px ring is inset
+ * (box-shadow, not border) so the button keeps the exact height of the primary
+ * CTA beside it.
+ */
+.cta-android-wrap {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+}
+
+/* Button fills the wrapper so the halo always matches the button box */
+.cta-android-wrap > .cta-android {
+  flex: 1 1 auto;
+}
+
+.cta-android-halo {
+  position: absolute;
+  inset: -0.3rem;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 1rem;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(35, 199, 232, 0.46),
+    rgba(22, 119, 255, 0.26) 55%,
+    transparent 76%
+  );
+  filter: blur(10px);
+  animation: android-cta-halo 3.8s ease-in-out infinite;
+}
+
+.cta-android {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background-color: rgba(7, 34, 74, 0.42);
+  background-image: linear-gradient(
+    135deg,
+    rgba(35, 199, 232, 0.26) 0%,
+    rgba(22, 119, 255, 0.2) 55%,
+    rgba(255, 255, 255, 0.08) 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(35, 199, 232, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 12px 30px rgba(6, 52, 118, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.cta-android:hover {
+  background-color: rgba(7, 34, 74, 0.34);
+  box-shadow:
+    inset 0 0 0 1px rgba(35, 199, 232, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 16px 36px rgba(6, 52, 118, 0.5),
+    0 0 22px rgba(35, 199, 232, 0.28);
+  transform: translateY(-1px);
+}
+
+.cta-android:active {
+  transform: translateY(0);
+}
+
+/* Sheen sweeps once per cycle, then rests off-canvas */
+.cta-android::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 45%;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.38) 50%,
+    transparent 100%
+  );
+  translate: -170% 0;
+  animation: android-cta-sheen 4.4s ease-in-out infinite;
+}
+
+/* White chip keeps the green bugdroid readable on the navy glass */
+.cta-android-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow:
+    0 2px 6px rgba(4, 26, 66, 0.28),
+    0 0 0 1px rgba(35, 199, 232, 0.35);
+}
+
+.cta-android-tray {
+  animation: android-cta-nudge 3.2s ease-in-out infinite;
+}
+
 /* Problem → Solution — sits under hero wave bleed (same #F4FAFF) */
 .problem-solution-section {
   isolation: isolate;
@@ -276,66 +379,113 @@ body {
   background-position: center top;
 }
 
-/* Problem mobile module cards — chamfered face + top tab + accent glow */
-.problem-module-card {
-  --module-cut: 0.9rem;
+/* Mobile problem → solution story ——————————————————————————— */
+
+/*
+ * Both mobile artworks ship with generous transparent padding. Negative margins
+ * crop it back so the stacked story reads tightly; percentages resolve against
+ * the column width, so they stay correct at every mobile size.
+ * mob-problem.png: ~12% top / ~17% bottom of a 2:3 frame.
+ * mob-solution.png: ~14% on each side of a 3:2 frame.
+ */
+.problem-mob-art {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.problem-mob-art--problem {
+  margin-block: -12% -20%;
+}
+
+.problem-mob-art--solution {
+  width: 120%;
+  max-width: none;
+  margin-inline: -10%;
+  margin-block: -3% -6%;
+}
+
+/* Vertical flow line linking the mess → CM360 → the fix */
+.problem-flow-rail {
   position: relative;
-  min-width: 0;
-  padding-top: 0.4rem;
-  filter: drop-shadow(0 14px 24px var(--module-glow));
-}
-
-.problem-module-tab {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 2;
-  width: 1.9rem;
-  height: 0.52rem;
-  translate: -50% 0;
+  width: 2px;
+  height: 2.15rem;
+  border-radius: 999px;
   background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--module-accent) 70%, white) 0%,
-    var(--module-accent) 45%,
-    color-mix(in srgb, var(--module-accent) 75%, #0b2344) 100%
-  );
-  clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%);
-}
-
-.problem-module-shell {
-  clip-path: polygon(
-    var(--module-cut) 0%,
-    calc(100% - var(--module-cut)) 0%,
-    100% var(--module-cut),
-    100% calc(100% - var(--module-cut)),
-    calc(100% - var(--module-cut)) 100%,
-    var(--module-cut) 100%,
-    0% calc(100% - var(--module-cut)),
-    0% var(--module-cut)
-  );
-  background: color-mix(in srgb, var(--module-accent) 45%, #fff);
-  padding: 1.5px;
-}
-
-.problem-module-face {
-  min-height: 5.1rem;
-  padding: 0.85rem 0.7rem 0.8rem;
-  background: #fff;
-  clip-path: polygon(
-    calc(var(--module-cut) - 1px) 0%,
-    calc(100% - (var(--module-cut) - 1px)) 0%,
-    100% calc(var(--module-cut) - 1px),
-    100% calc(100% - (var(--module-cut) - 1px)),
-    calc(100% - (var(--module-cut) - 1px)) 100%,
-    calc(var(--module-cut) - 1px) 100%,
-    0% calc(100% - (var(--module-cut) - 1px)),
-    0% calc(var(--module-cut) - 1px)
+    180deg,
+    rgba(22, 119, 255, 0) 0%,
+    rgba(22, 119, 255, 0.5) 45%,
+    rgba(35, 199, 232, 0.85) 100%
   );
 }
 
-.problem-outcomes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.problem-flow-rail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  translate: -50% 0;
+  background: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(35, 199, 232, 0.2);
+  animation: problem-flow-dot 2.6s ease-in-out infinite;
+}
+
+.problem-bridge-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: 132%;
+  height: 150%;
+  translate: -50% -50%;
+  border-radius: 999px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(22, 119, 255, 0.22),
+    rgba(35, 199, 232, 0.1) 45%,
+    transparent 72%
+  );
+  filter: blur(18px);
+}
+
+.problem-bridge-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.3rem;
+  background: var(--gradient-hero);
+  box-shadow:
+    0 18px 44px rgba(9, 46, 110, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+/* Soft top-left sheen so the card reads as glass, not flat fill */
+.problem-bridge-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    125% 95% at 14% 0%,
+    rgba(255, 255, 255, 0.3),
+    transparent 58%
+  );
+  pointer-events: none;
+}
+
+.problem-bridge-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.55rem;
+  height: 2.55rem;
+  flex-shrink: 0;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 8px 18px rgba(4, 26, 66, 0.28),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
 }
 
 .hero-wave {
@@ -496,6 +646,21 @@ body {
   }
 }
 
+@keyframes problem-flow-dot {
+  0% {
+    top: -0.19rem;
+    opacity: 0;
+  }
+  18%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 0.19rem);
+    opacity: 0;
+  }
+}
+
 @keyframes hero-badge-breathe {
   0%,
   100% {
@@ -515,6 +680,42 @@ body {
   100% {
     transform: scale(2.4);
     opacity: 0;
+  }
+}
+
+@keyframes android-cta-halo {
+  0%,
+  100% {
+    opacity: 0.42;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes android-cta-sheen {
+  0% {
+    translate: -170% 0;
+  }
+  34%,
+  100% {
+    translate: 330% 0;
+  }
+}
+
+@keyframes android-cta-nudge {
+  0%,
+  68%,
+  100% {
+    transform: translateY(0);
+  }
+  78% {
+    transform: translateY(2.5px);
+  }
+  88% {
+    transform: translateY(0);
   }
 }
 
@@ -632,7 +833,20 @@ body {
   .hero-badge-breathe,
   .hero-status-ping,
   .device-badge-blink,
-  .device-badge-ping {
+  .device-badge-ping,
+  .cta-android-halo,
+  .cta-android::after,
+  .cta-android-tray,
+  .problem-flow-rail::after {
     animation: none;
+  }
+
+  /* Keep the CTA's static glow; drop only the moving highlight */
+  .cta-android-halo {
+    opacity: 0.6;
+  }
+
+  .cta-android::after {
+    display: none;
   }
 }
