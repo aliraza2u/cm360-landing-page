@@ -4,7 +4,7 @@ import path from "node:path";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LegalMarkdown } from "@/components/legal-markdown";
-import { SITE_URL } from "@/lib/site";
+import { socialMetadata } from "@/lib/site";
 
 const TERMS_DESCRIPTION =
   "Read the CM360 Terms & Conditions governing use of the CM360 construction management platform, company workspaces, subscriptions, user content, and account services.";
@@ -13,17 +13,11 @@ export const metadata: Metadata = {
   title: "Terms & Conditions",
   description: TERMS_DESCRIPTION,
   alternates: { canonical: "/terms" },
-  openGraph: {
+  ...socialMetadata({
     title: "Terms & Conditions | CM360",
     description: TERMS_DESCRIPTION,
-    url: `${SITE_URL}/terms`,
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Terms & Conditions | CM360",
-    description: TERMS_DESCRIPTION,
-  },
+    path: "/terms",
+  }),
   robots: { index: true, follow: true },
 };
 

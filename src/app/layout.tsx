@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
-import { SITE_URL, BRAND, SEO } from "@/lib/site";
+import { SITE_URL, BRAND, SEO, TWITTER_CARD } from "@/lib/site";
 
-const sans = Inter({
+const sans = Roboto({
   variable: "--font-sans",
   subsets: ["latin"],
+  // Matches site usage: regular / medium / semibold / bold / extrabold / black
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -39,10 +41,18 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     title: SEO.title,
     description: SEO.description,
-    images: [SEO.ogImage],
+    images: [
+      {
+        url: SEO.ogImage.url,
+        width: SEO.ogImage.width,
+        height: SEO.ogImage.height,
+        type: SEO.ogImage.type,
+        alt: SEO.ogImage.alt,
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: TWITTER_CARD,
     title: SEO.title,
     description: SEO.description,
     images: [SEO.ogImage.url],

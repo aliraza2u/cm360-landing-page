@@ -7,7 +7,7 @@ import { MultiDeviceSection } from "@/components/sections/multi-device";
 import { AudienceSection } from "@/components/sections/audience";
 import { AndroidDownloadSection } from "@/components/sections/android-download";
 import { ContactSection } from "@/components/sections/contact";
-import { BRAND, SEO, SITE_URL, SOCIAL, absoluteUrl } from "@/lib/site";
+import { BRAND, SEO, SITE_URL, SOCIAL, TWITTER_CARD, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: {
@@ -22,10 +22,20 @@ export const metadata: Metadata = {
     description: SEO.description,
     url: absoluteUrl("/"),
     type: "website",
-    images: [SEO.ogImage],
+    siteName: BRAND.name,
+    locale: "en_US",
+    images: [
+      {
+        url: SEO.ogImage.url,
+        width: SEO.ogImage.width,
+        height: SEO.ogImage.height,
+        type: SEO.ogImage.type,
+        alt: SEO.ogImage.alt,
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: TWITTER_CARD,
     title: SEO.title,
     description: SEO.description,
     images: [SEO.ogImage.url],
@@ -46,7 +56,7 @@ function buildJsonLd() {
     name: BRAND.name,
     alternateName: BRAND.alternateName,
     url: SITE_URL,
-    logo: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl(SEO.brandIcon.url),
   };
 
   if (sameAs.length > 0) {

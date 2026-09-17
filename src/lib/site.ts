@@ -18,15 +18,29 @@ export const SEO = {
   title: "Construction Management Software for Builders & Contractors | CM360",
   description:
     "CM360 is construction management software for managing projects, clients, labour, subcontractors, expenses, payments and reports in one platform.",
+  /**
+   * Primary share image (1200×630). Composed from public/brand/og.png (brand icon).
+   * Social crawlers do not reliably support SVG for og:image.
+   */
   ogImage: {
-    // Raster OG asset regenerated from public/icon.svg (transparent).
-    // Social crawlers do not reliably support SVG for og:image.
+    url: "/brand/og-share.png",
+    width: 1200,
+    height: 630,
+    type: "image/png",
+    alt: "CM360 — Construction management software for builders and contractors",
+  },
+  /** Square brand mark for icons / schema — not the primary link-preview crop. */
+  brandIcon: {
     url: "/brand/og.png",
     width: 512,
     height: 512,
+    type: "image/png",
     alt: "CM360 — Construction Manager 360 logo",
   },
 } as const;
+
+/** Twitter / X large card — pairs with the 1200×630 og-share asset. */
+export const TWITTER_CARD = "summary_large_image" as const;
 
 /**
  * Canonical public marketing routes for sitemap / internal reference.
@@ -45,6 +59,43 @@ export function absoluteUrl(path = "/"): string {
   // Match Next.js default trailingSlash:false — root canonical is https://cm360.site
   if (path === "/") return SITE_URL;
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+/** Shared Open Graph + Twitter fields for marketing/legal pages. */
+export function socialMetadata({
+  title,
+  description,
+  path,
+}: {
+  title: string;
+  description: string;
+  path: string;
+}) {
+  return {
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl(path),
+      type: "website" as const,
+      siteName: BRAND.name,
+      locale: "en_US",
+      images: [
+        {
+          url: SEO.ogImage.url,
+          width: SEO.ogImage.width,
+          height: SEO.ogImage.height,
+          type: SEO.ogImage.type,
+          alt: SEO.ogImage.alt,
+        },
+      ],
+    },
+    twitter: {
+      card: TWITTER_CARD,
+      title,
+      description,
+      images: [SEO.ogImage.url],
+    },
+  };
 }
 
 /**

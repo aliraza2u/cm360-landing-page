@@ -4,7 +4,7 @@ import path from "node:path";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { LegalMarkdown } from "@/components/legal-markdown";
-import { SITE_URL } from "@/lib/site";
+import { socialMetadata } from "@/lib/site";
 
 const PRIVACY_DESCRIPTION =
   "Read the CM360 Privacy Policy to understand how we collect, use, protect, retain, and delete account and company information.";
@@ -13,17 +13,11 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: PRIVACY_DESCRIPTION,
   alternates: { canonical: "/privacy" },
-  openGraph: {
+  ...socialMetadata({
     title: "Privacy Policy | CM360",
     description: PRIVACY_DESCRIPTION,
-    url: `${SITE_URL}/privacy`,
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Privacy Policy | CM360",
-    description: PRIVACY_DESCRIPTION,
-  },
+    path: "/privacy",
+  }),
   robots: { index: true, follow: true },
 };
 

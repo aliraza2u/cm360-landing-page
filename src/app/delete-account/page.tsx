@@ -10,27 +10,23 @@ import {
   CONTACT,
   SITE_URL,
   accountDeletionMailto,
+  socialMetadata,
   supportMailto,
 } from "@/lib/site";
 
+const DELETE_TITLE = "Delete Your CM360 Account | CM360";
+const DELETE_DESCRIPTION =
+  "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.";
+
 export const metadata: Metadata = {
   title: "Delete Your CM360 Account",
-  description:
-    "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.",
+  description: DELETE_DESCRIPTION,
   alternates: { canonical: "/delete-account" },
-  openGraph: {
-    title: "Delete Your CM360 Account | CM360",
-    description:
-      "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.",
-    url: `${SITE_URL}/delete-account`,
-    type: "website",
-  },
-  twitter: {
-    card: "summary",
-    title: "Delete Your CM360 Account | CM360",
-    description:
-      "Learn how to request deletion of your CM360 account and associated data, including company deletion for workspace owners.",
-  },
+  ...socialMetadata({
+    title: DELETE_TITLE,
+    description: DELETE_DESCRIPTION,
+    path: "/delete-account",
+  }),
   robots: { index: true, follow: true },
 };
 
