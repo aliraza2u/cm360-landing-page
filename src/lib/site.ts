@@ -27,7 +27,7 @@ export const SEO = {
     width: 1200,
     height: 630,
     type: "image/png",
-    alt: "CM360 — Construction management software for builders and contractors",
+    alt: "CM360 — Smart Construction Management Software for builders and contractors",
   },
   /** Square brand mark for icons / schema — not the primary link-preview crop. */
   brandIcon: {
