@@ -76,6 +76,11 @@ export function getUpstreamApkUrl(): string {
   return env("ANDROID_APK_URL");
 }
 
+/** Human-readable APK version shown on the download UI (e.g. 1.0.30). */
+export function getApkVersionName(): string {
+  return env("ANDROID_APK_VERSION");
+}
+
 function formatBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
@@ -112,12 +117,16 @@ export function formatMinAndroid(minSdk: number | null): string | null {
 
 /**
  * Marketing/download UI release facts from verified inspect output + env.
- * Run `pnpm android:inspect -- /path/to.apk` after each new EAS/Android build,
- * then update ANDROID_APK_URL in Vercel env to the new artifact URL.
+ * After each new EAS/Android build, update in Vercel env:
+ *   - ANDROID_APK_URL (artifact URL)
+ *   - ANDROID_APK_VERSION (e.g. 1.0.30)
+ * Optionally re-run `pnpm android:inspect` and commit android-release.json
+ * for size / SHA / min SDK facts.
  */
 export function getAndroidRelease(): AndroidRelease {
   const meta = releaseMeta as ReleaseMetaFile;
   const upstreamConfigured = Boolean(getUpstreamApkUrl());
+  const versionFromEnv = getApkVersionName();
   let localPresent = false;
   try {
     localPresent = existsSync(/*turbopackIgnore: true*/ getLocalApkPath());
@@ -131,7 +140,8 @@ export function getAndroidRelease(): AndroidRelease {
     available: Boolean(meta.available) && Boolean(meta.sha256) && deliveryReady,
     fileName: meta.fileName || "cm360-android.apk",
     packageName: meta.packageName ?? null,
-    versionName: meta.versionName ?? null,
+    // Prefer ENV so version can be bumped without a code deploy.
+    versionName: versionFromEnv || meta.versionName || null,
     versionCode: meta.versionCode ?? null,
     minSdkVersion: meta.minSdkVersion ?? null,
     releaseDate: meta.releaseDate ?? null,
